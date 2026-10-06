@@ -35,10 +35,14 @@ app.use(
 app.use(
   cors({
     origin: (origin, callback) => {
-      // In production, strictly match configured FRONTEND_URL or CORS_ORIGIN
+      // In production, match configured origins, vercel preview domains, or requests with no origin (webhooks/same-origin)
       if (ENV.NODE_ENV === 'production') {
         const allowedOrigins = [ENV.FRONTEND_URL, ENV.CORS_ORIGIN].filter(Boolean);
-        if (origin && allowedOrigins.includes(origin)) {
+        if (
+          !origin ||
+          allowedOrigins.includes(origin) ||
+          origin.endsWith('.vercel.app')
+        ) {
           callback(null, true);
         } else {
           callback(new Error('Blocked by CORS policy'));

@@ -4,7 +4,7 @@
 export const API_BASE_URL =
   ((import.meta as any).env?.VITE_API_URL as string) ||
   ((import.meta as any).env?.VITE_API_BASE_URL as string) ||
-  'http://localhost:5000/api';
+  (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
 export const TOKEN_STORAGE_KEY = 'sukhyatri_auth_token';
 
 export interface ApiResponse<T = any> {

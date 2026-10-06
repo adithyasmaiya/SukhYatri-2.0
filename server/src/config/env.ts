@@ -7,8 +7,8 @@ export const ENV = {
   MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/sukhyatri',
   JWT_SECRET: process.env.JWT_SECRET || 'sukhyatri_jwt_secret_dev_key_2026_secured',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
-  FRONTEND_URL: process.env.FRONTEND_URL || process.env.CORS_ORIGIN || 'http://localhost:5173',
-  CORS_ORIGIN: process.env.FRONTEND_URL || process.env.CORS_ORIGIN || 'http://localhost:5173',
+  FRONTEND_URL: process.env.FRONTEND_URL || process.env.APP_URL || process.env.CORS_ORIGIN || 'http://localhost:5173',
+  CORS_ORIGIN: process.env.CORS_ORIGIN || process.env.FRONTEND_URL || process.env.APP_URL || 'http://localhost:5173',
   API_URL: process.env.API_URL || 'http://localhost:5000/api',
   ADMIN_NAME: process.env.ADMIN_NAME || 'SukhYatri Admin',
   ADMIN_EMAIL: process.env.ADMIN_EMAIL || 'admin@sukhyatri.com',
@@ -33,7 +33,7 @@ if (ENV.NODE_ENV === 'production') {
   const missing: string[] = [];
   if (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes('dev')) missing.push('JWT_SECRET (must be unique & secure)');
   if (!process.env.MONGODB_URI) missing.push('MONGODB_URI');
-  if (!process.env.FRONTEND_URL && !process.env.CORS_ORIGIN) missing.push('FRONTEND_URL');
+  if (!process.env.FRONTEND_URL && !process.env.CORS_ORIGIN && !process.env.APP_URL) missing.push('FRONTEND_URL / APP_URL');
   if (!process.env.RAZORPAY_KEY_ID) missing.push('RAZORPAY_KEY_ID');
   if (!process.env.RAZORPAY_KEY_SECRET) missing.push('RAZORPAY_KEY_SECRET');
   if (!process.env.RAZORPAY_WEBHOOK_SECRET) missing.push('RAZORPAY_WEBHOOK_SECRET');
