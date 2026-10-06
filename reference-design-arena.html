@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SukhYatri — Travel in Comfort. Arrive in Joy.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        cream: '#FAF7F1',
+        cream2: '#F3EEE3',
+        ink: '#15211E',
+        pine: '#0E3B34',
+        pinedark: '#0A2924',
+        moss: '#147A70',
+        mosslight: '#E6F1EE',
+        sand: '#C8A96A',
+        sandlight: '#F2E8D5',
+        clay: '#C86B4A',
+        stonewarm: '#E9E2D6',
+        muted: '#6B7572'
+      },
+      fontFamily: {
+        display: ['Fraunces','serif'],
+        sans: ['Plus Jakarta Sans','sans-serif']
+      },
+      boxShadow: {
+        soft: '0 12px 40px -12px rgba(21,33,30,0.18)',
+        card: '0 8px 30px -10px rgba(21,33,30,0.15)',
+        lift: '0 20px 50px -15px rgba(14,59,52,0.35)'
+      }
+    }
+  }
+}
+</script>
+<style>
+:root{
+  --cream:#FAF7F1; --ink:#15211E; --pine:#0E3B34; --moss:#147A70; --sand:#C8A96A; --line:#E9E2D6;
+}
+*{ -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'Plus Jakarta Sans',sans-serif; background:var(--cream); color:var(--ink); overflow-x:hidden; }
+.font-display{ font-family:'Fraunces',serif; }
+.label-eyebrow{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; font-weight:700; }
+.grain::after{ content:''; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.btn-primary{ background:#0E3B34; color:#fff; border-radius:999px; font-weight:700; transition:.3s; display:inline-flex; align-items:center; justify-content:center; gap:.6rem; }
+.btn-primary:hover{ background:#147A70; transform:translateY(-1px); box-shadow:0 12px 30px -10px rgba(20,122,112,.5); }
+.btn-gold{ background:#C8A96A; color:#15211E; border-radius:999px; font-weight:800; transition:.3s; display:inline-flex; align-items:center; justify-content:center; gap:.6rem; }
+.btn-gold:hover{ background:#D8BE8A; transform:translateY(-1px); }
+.btn-outline{ border:1.5px solid #D9D1C0; border-radius:999px; font-weight:700; transition:.3s; background:#fff; }
+.btn-outline:hover{ border-color:#0E3B34; color:#0E3B34; }
+.btn-ghostlight{ border:1.5px solid rgba(255,255,255,.35); color:#fff; border-radius:999px; font-weight:700; transition:.3s; }
+.btn-ghostlight:hover{ background:#fff; color:#0E3B34; }
+.input{ background:#fff; border:1.5px solid #E9E2D6; border-radius:14px; padding:.85rem 1rem; width:100%; font-size:.92rem; outline:none; transition:.25s; }
+.input:focus{ border-color:#147A70; box-shadow:0 0 0 4px rgba(20,122,112,.12); }
+.input-soft{ background:#F6F2E9; border:1px solid transparent; }
+.chip{ border:1.5px solid #E9E2D6; background:#fff; border-radius:999px; padding:.45rem .95rem; font-size:.8rem; font-weight:600; cursor:pointer; transition:.25s; white-space:nowrap; }
+.chip.active, .chip:hover{ background:#0E3B34; color:#fff; border-color:#0E3B34; }
+.chip-gold.active{ background:#C8A96A; border-color:#C8A96A; color:#15211E; }
+.badge{ display:inline-flex; align-items:center; gap:.35rem; font-size:.72rem; font-weight:700; letter-spacing:.04em; padding:.35rem .7rem; border-radius:999px; }
+.card-hover{ transition:.4s cubic-bezier(.2,.8,.2,1); }
+.card-hover:hover{ transform:translateY(-6px); box-shadow:0 24px 50px -18px rgba(21,33,30,.28); }
+.img-zoom{ overflow:hidden; } .img-zoom img{ transition:transform 1.2s cubic-bezier(.2,.8,.2,1); } .img-zoom:hover img{ transform:scale(1.07); }
+.navlink{ position:relative; font-weight:600; font-size:.9rem; color:#3A4542; transition:.25s; } .navlink:hover,.navlink.active{ color:#0E3B34; } .navlink.active::after{ content:''; position:absolute; left:0; right:0; bottom:-6px; height:2px; background:#C8A96A; border-radius:2px; }
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); } .reveal.visible{ opacity:1; transform:none; }
+.hero-kenburns{ animation:ken 18s ease-in-out infinite alternate; } @keyframes ken{ from{ transform:scale(1) } to{ transform:scale(1.12) } }
+.marquee-track{ display:flex; gap:3rem; animation:marq 28s linear infinite; width:max-content; } @keyframes marq{ to{ transform:translateX(-50%) } }
+.float-soft{ animation:floaty 6s ease-in-out infinite; } @keyframes floaty{ 0%,100%{ transform:translateY(0)} 50%{ transform:translateY(-10px)} }
+.step-line::before{ content:''; position:absolute; left:27px; top:56px; bottom:-10px; width:2px; background:#E9E2D6; } .step-item:last-child .step-line::before{ display:none; }
+.acc-body{ max-height:0; overflow:hidden; transition:max-height .45s ease; } .acc-open .acc-body{ max-height:600px; } .acc-open .acc-icon{ transform:rotate(45deg); } .acc-icon{ transition:.3s; }
+.tab-underline{ position:relative; } .tab-underline.active{ color:#0E3B34; } .tab-underline.active::after{ content:''; position:absolute; left:0; right:0; bottom:-10px; height:3px; background:#0E3B34; border-radius:3px; }
+.no-scrollbar::-webkit-scrollbar{ display:none } .no-scrollbar{ scrollbar-width:none }
+::-webkit-scrollbar{ width:10px; height:10px } ::-webkit-scrollbar-track{ background:#F3EEE3 } ::-webkit-scrollbar-thumb{ background:#0E3B34; border-radius:8px; border:2px solid #F3EEE3 }
+.dot{ width:8px; height:8px; border-radius:99px; background:#D9D1C0; transition:.3s; cursor:pointer } .dot.active{ width:28px; background:#0E3B34 }
+.toast-in{ animation:toastIn .45s cubic-bezier(.2,.9,.3,1.2) } @keyframes toastIn{ from{ transform:translateY(20px) scale(.95); opacity:0 } to{ transform:none; opacity:1 } }
+.check-pop{ animation:pop .6s cubic-bezier(.2,1.4,.4,1) } @keyframes pop{ 0%{ transform:scale(0)} 100%{ transform:scale(1)} }
+.shimmer{ position:relative; overflow:hidden } .shimmer::after{ content:''; position:absolute; inset:0; background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%); animation:shim 2s infinite; } @keyframes shim{ from{ transform:translateX(-100%)} to{ transform:translateX(100%)} }
+.page{ display:none } .page.active{ display:block; animation:pageIn .5s ease } @keyframes pageIn{ from{ opacity:0; transform:translateY(12px)} to{ opacity:1; transform:none} }
+.timeline-dot::before{ content:''; position:absolute; left:-5px; top:6px; width:12px; height:12px; border-radius:99px; background:#C8A96A; border:3px solid #fff; box-shadow:0 0 0 2px #C8A96A; }
+input[type=range]{ accent-color:#0E3B34 }
+select.input{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230E3B34' stroke-width='2'%3E%3Cpath d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; background-size:18px; }
+.admin-navitem{ display:flex; align-items:center; gap:.8rem; padding:.8rem 1rem; border-radius:12px; font-weight:600; font-size:.9rem; color:#9AB0AA; transition:.25s; cursor:pointer } .admin-navitem:hover,.admin-navitem.active{ background:rgba(200,169,106,.15); color:#fff } .admin-navitem.active{ background:#147A70; color:#fff }
+.status-confirmed{ background:#E6F1EE; color:#147A70 } .status-pending{ background:#FFF4DE; color:#9A7410 } .status-cancelled{ background:#FDECEC; color:#B42318 }
+@media(max-width:768px){ .hero-title{ font-size:2.6rem!important; line-height:1.05!important } }
+</style>
+</head>
+<body class="bg-cream text-ink antialiased">
+
+<!-- TOASTS -->
+<div id="toasts" class="fixed bottom-6 right-6 z-[200] flex flex-col gap-3 max-w-sm w-[calc(100%-3rem)]"></div>
+
+<!-- ANNOUNCEMENT -->
+<div id="announceBar" class="bg-pinedark text-white text-center text-[13px] py-2.5 px-4 font-medium tracking-wide relative z-50">
+  <span class="inline-flex items-center gap-2 flex-wrap justify-center"><span class="w-1.5 h-1.5 rounded-full bg-sand inline-block animate-pulse"></span> Festive Season — Flat 15% off curated journeys with code <button onclick="copyCode('SUKH15')" class="font-extrabold text-sand underline underline-offset-2">SUKH15</button> <span class="hidden sm:inline opacity-60">·</span> <span class="hidden sm:inline opacity-80">Complimentary airport lounge on premium packages</span></span>
+</div>
+
+<!-- ============ CUSTOMER APP ============ -->
+<div id="customerApp">
+<!-- NAVBAR -->
+<header class="sticky top-0 z-[100] bg-cream/90 backdrop-blur-xl border-b border-stonewarm">
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8">
+    <div class="flex items-center justify-between h-[72px]">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+        <div class="w-10 h-10 rounded-2xl bg-pine flex items-center justify-center relative overflow-hidden">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 6 5 9.5 5 13.5A7 7 0 0 0 12 20.5A7 7 0 0 0 19 13.5C19 9.5 16 6 12 2Z" fill="#C8A96A"/><circle cx="12" cy="13.5" r="2.6" fill="#0E3B34"/><path d="M8.5 17.5c1-1 2.2-1.5 3.5-1.5s2.5.5 3.5 1.5" stroke="#FAF7F1" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <div class="absolute -bottom-2 -right-2 w-6 h-6 bg-moss/30 rounded-full blur-sm"></div>
+        </div>
+        <div class="leading-none">
+          <div class="font-display font-bold text-[22px] tracking-tight">Sukh<span class="text-moss">Yatri</span></div>
+          <div class="text-[10px] font-bold tracking-[.22em] uppercase text-muted mt-0.5">Comfort · Joy · Yatra</div>
+        </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8">
+        <a class="navlink active" data-nav="home" onclick="navigate('home')">Home</a>
+        <a class="navlink" data-nav="explore" onclick="navigate('explore')">Explore Trips</a>
+        <div class="relative group">
+          <button class="navlink flex items-center gap-1">Destinations <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+            <div class="bg-white rounded-2xl shadow-lift border border-stonewarm p-3 w-[520px] grid grid-cols-2 gap-2" id="navDestDropdown"></div>
+          </div>
+        </div>
+        <a class="navlink" data-nav="about" onclick="navigate('about')">Our Story</a>
+        <a class="navlink" data-nav="contact" onclick="navigate('contact')">Contact</a>
+      </nav>
+      <div class="hidden lg:flex items-center gap-3">
+        <button onclick="navigate('explore')" class="text-sm font-bold text-pine flex items-center gap-2 hover:gap-3 transition-all"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> Search</button>
+        <button onclick="toggleAdmin(true)" class="text-[12px] font-bold text-muted border border-stonewarm rounded-full px-3 py-1.5 hover:border-pine hover:text-pine transition">Admin</button>
+        <div id="navAuthArea" class="flex items-center gap-3"></div>
+      </div>
+      <div class="flex lg:hidden items-center gap-2">
+        <button onclick="navigate('explore')" class="w-10 h-10 rounded-full bg-white border border-stonewarm flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>
+        <button id="hamburger" onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full bg-pine text-white flex items-center justify-center"><svg id="hamIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="lg:hidden hidden border-t border-stonewarm bg-cream px-5 py-5 space-y-1 max-h-[80vh] overflow-auto">
+    <button onclick="navigate('home')" class="w-full text-left font-bold py-3 border-b border-stonewarm">Home</button>
+    <button onclick="navigate('explore')" class="w-full text-left font-bold py-3 border-b border-stonewarm">Explore Trips</button>
+    <div class="py-3 border-b border-stonewarm"><div class="label-eyebrow text-muted mb-3">Destinations</div><div id="mobileDestList" class="flex flex-wrap gap-2"></div></div>
+    <button onclick="navigate('about')" class="w-full text-left font-bold py-3 border-b border-stonewarm">Our Story</button>
+    <button onclick="navigate('contact')" class="w-full text-left font-bold py-3 border-b border-stonewarm">Contact</button>
+    <button onclick="navigate('trips')" class="w-full text-left font-bold py-3 border-b border-stonewarm">My Trips</button>
+    <div class="pt-4 flex gap-3"><div id="mobileAuthArea" class="flex-1"></div><button onclick="toggleAdmin(true)" class="btn-outline px-5 py-3 text-sm">Admin</button></div>
+  </div>
+</header>
+
+<main>
+<!-- ================= HOME ================= -->
+<section id="page-home" class="page active">
+  <!-- HERO -->
+  <div class="relative overflow-hidden grain">
+    <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover hero-kenburns" alt="Himalayas"/><div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/25 to-[#0A2924]/90"></div></div>
+    <div class="relative max-w-[1280px] mx-auto px-5 lg:px-8 pt-14 lg:pt-24 pb-10">
+      <div class="flex flex-wrap items-center gap-2 mb-6 reveal visible">
+        <span class="badge bg-white/15 text-white border border-white/25 backdrop-blur">● 12,400+ happy yatris this year</span>
+        <span class="badge bg-sand text-ink">★ 4.9 Rated · Trusted since 2019</span>
+      </div>
+      <h1 class="hero-title font-display text-white font-semibold text-[3.2rem] lg:text-[5.2rem] leading-[1.02] max-w-4xl tracking-tight">Travel in Comfort.<br/><span class="italic font-medium text-sandlight">Arrive in Joy.</span></h1>
+      <p class="text-white/85 text-[16px] lg:text-lg mt-5 max-w-xl leading-relaxed">Curated Indian journeys — slow houseboats, Himalayan silence, royal cities & island blues. Handpicked stays, private drivers, and a travel concierge that actually cares.</p>
+
+      <!-- SEARCH CARD -->
+      <div class="mt-8 bg-white rounded-[22px] p-3 lg:p-4 shadow-lift max-w-5xl">
+        <div class="grid md:grid-cols-[1.3fr_1fr_1fr_1fr_auto] gap-2">
+          <div class="bg-cream2 rounded-2xl px-4 py-3"><label class="label-eyebrow text-muted">Where to?</label><select id="heroDest" class="bg-transparent font-bold w-full outline-none mt-1 text-[15px]"><option value="">Anywhere in India</option></select></div>
+          <div class="bg-cream2 rounded-2xl px-4 py-3"><label class="label-eyebrow text-muted">When?</label><select id="heroMonth" class="bg-transparent font-bold w-full outline-none mt-1 text-[15px]"><option>Flexible</option><option>Oct – Nov 2026</option><option>Dec – Jan 2027</option><option>Feb – Mar 2027</option><option>Apr – Jun 2027</option></select></div>
+          <div class="bg-cream2 rounded-2xl px-4 py-3"><label class="label-eyebrow text-muted">Travel style</label><select id="heroStyle" class="bg-transparent font-bold w-full outline-none mt-1 text-[15px]"><option value="">All styles</option><option>Slow & Relaxed</option><option>Adventure</option><option>Heritage & Culture</option><option>Honeymoon</option><option>Family</option><option>Spiritual</option></select></div>
+          <div class="bg-cream2 rounded-2xl px-4 py-3"><label class="label-eyebrow text-muted">Travellers</label><div class="flex items-center gap-3 mt-1 font-bold"><button onclick="heroTrav(-1)" class="w-7 h-7 rounded-full bg-white border border-stonewarm font-bold">−</button><span id="heroTravCount">2</span><button onclick="heroTrav(1)" class="w-7 h-7 rounded-full bg-pine text-white font-bold">+</button></div></div>
+          <button onclick="heroSearch()" class="btn-primary px-8 py-4 text-[15px] rounded-2xl">Search <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 px-2 pt-3 pb-1 text-[13px]">
+          <span class="text-muted font-semibold">Popular:</span>
+          <button onclick="quickSearch('kerala')" class="chip !py-1.5">Kerala Backwaters</button>
+          <button onclick="quickSearch('ladakh')" class="chip !py-1.5">Ladakh</button>
+          <button onclick="quickSearch('andaman')" class="chip !py-1.5">Andaman</button>
+          <button onclick="quickSearch('rajasthan')" class="chip !py-1.5">Royal Rajasthan</button>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-8 text-white">
+        <div><div class="font-display text-3xl font-semibold">48+</div><div class="text-white/70 text-sm font-medium">Curated routes</div></div>
+        <div class="w-px bg-white/20"></div>
+        <div><div class="font-display text-3xl font-semibold">1.2L+</div><div class="text-white/70 text-sm font-medium">Travellers hosted</div></div>
+        <div class="w-px bg-white/20"></div>
+        <div><div class="font-display text-3xl font-semibold">4.9/5</div><div class="text-white/70 text-sm font-medium">Average rating</div></div>
+        <div class="w-px bg-white/20 hidden sm:block"></div>
+        <div class="hidden sm:flex items-center gap-3"><div class="flex -space-x-3"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full border-2 border-white object-cover"/><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full border-2 border-white object-cover"/><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full border-2 border-white object-cover"/></div><div class="text-sm text-white/80 font-medium">Loved across<br/>28 states</div></div>
+      </div>
+    </div>
+    <!-- trust strip -->
+    <div class="relative bg-cream rounded-t-[28px] mt-6"><div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-5 flex items-center gap-6 overflow-x-auto no-scrollbar"><span class="label-eyebrow text-muted whitespace-nowrap">As featured in</span><div class="marquee-track items-center opacity-60 font-display text-lg whitespace-nowrap"><span>Condé Nast Traveller</span><span>·</span><span>Travel + Leisure India</span><span>·</span><span>YourStory</span><span>·</span><span>Economic Times Travel</span><span>·</span><span>Nat Geo Traveller</span><span>·</span><span>Condé Nast Traveller</span><span>·</span><span>Travel + Leisure India</span><span>·</span><span>YourStory</span><span>·</span><span>Economic Times Travel</span><span>·</span><span>Nat Geo Traveller</span></div></div></div>
+  </div>
+
+  <!-- POPULAR DESTINATIONS -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pt-14">
+    <div class="flex items-end justify-between gap-4 mb-7 reveal">
+      <div><div class="label-eyebrow text-moss mb-2">01 — Destinations</div><h2 class="font-display text-3xl lg:text-[44px] leading-tight font-semibold tracking-tight">Where will comfort<br/>take you next?</h2></div>
+      <button onclick="navigate('explore')" class="btn-outline px-6 py-3 text-sm hidden sm:inline-flex">View all trips <span>→</span></button>
+    </div>
+    <div id="homeDestGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+  </div>
+
+  <!-- TRENDING -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pt-20">
+    <div class="flex items-end justify-between gap-4 mb-2 reveal">
+      <div><div class="label-eyebrow text-moss mb-2">02 — Trending now</div><h2 class="font-display text-3xl lg:text-[44px] font-semibold tracking-tight">Trips travellers<br/>can't stop booking</h2></div>
+      <div class="hidden md:flex gap-2"><button onclick="scrollRow('trendRow',-1)" class="w-11 h-11 rounded-full border border-stonewarm bg-white font-bold">←</button><button onclick="scrollRow('trendRow',1)" class="w-11 h-11 rounded-full bg-pine text-white font-bold">→</button></div>
+    </div>
+    <p class="text-muted mb-7 max-w-lg">Real availability, honest pricing, small groups. These departures are filling for Oct – Jan.</p>
+    <div id="trendRow" class="flex gap-5 overflow-x-auto no-scrollbar snap-x pb-2 -mx-5 px-5 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-3 lg:overflow-visible"></div>
+  </div>
+
+  <!-- CURATED EXPERIENCES editorial -->
+  <div class="mt-20 bg-pinedark text-white relative overflow-hidden grain">
+    <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-[1fr_1.4fr] gap-12">
+      <div class="reveal">
+        <div class="label-eyebrow text-sand mb-3">03 — Curated experiences</div>
+        <h2 class="font-display text-3xl lg:text-5xl font-semibold leading-tight">Not sightseeing.<br/><span class="italic text-sandlight font-medium">Slow, soulful experiencing.</span></h2>
+        <p class="text-white/70 mt-5 leading-relaxed">Every SukhYatri journey weaves in at least two signature moments — private, unhurried, and hosted by locals we know by name.</p>
+        <div class="mt-7 flex flex-wrap gap-3"><button onclick="navigate('explore')" class="btn-gold px-7 py-3.5 text-sm">Explore experiences</button><button onclick="openConcierge()" class="btn-ghostlight px-7 py-3.5 text-sm">Talk to concierge</button></div>
+        <div class="mt-10 grid grid-cols-3 gap-4 text-center"><div class="bg-white/5 rounded-2xl p-4 border border-white/10"><div class="font-display text-2xl">120+</div><div class="text-xs text-white/60 font-semibold mt-1">Local hosts</div></div><div class="bg-white/5 rounded-2xl p-4 border border-white/10"><div class="font-display text-2xl">100%</div><div class="text-xs text-white/60 font-semibold mt-1">Verified stays</div></div><div class="bg-white/5 rounded-2xl p-4 border border-white/10"><div class="font-display text-2xl">24×7</div><div class="text-xs text-white/60 font-semibold mt-1">On-trip support</div></div></div>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5" id="expGrid"></div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-16 lg:py-24">
+    <div class="text-center max-w-2xl mx-auto reveal"><div class="label-eyebrow text-moss mb-2">04 — Why SukhYatri</div><h2 class="font-display text-3xl lg:text-[44px] font-semibold tracking-tight">Comfort is our compass</h2><p class="text-muted mt-3">We obsess over the unglamorous details — clean washrooms, honest drive times, soft beds — so you feel the magic, not the miles.</p></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10" id="whyGrid"></div>
+    <div class="mt-10 bg-white rounded-[24px] border border-stonewarm p-6 lg:p-8 grid md:grid-cols-4 gap-6 text-center shadow-card reveal">
+      <div><div class="font-display text-3xl font-semibold text-pine">98%</div><div class="text-sm text-muted font-medium mt-1">Would travel again</div></div>
+      <div><div class="font-display text-3xl font-semibold text-pine">4.9 ★</div><div class="text-sm text-muted font-medium mt-1">Across 8,200 reviews</div></div>
+      <div><div class="font-display text-3xl font-semibold text-pine">Zero</div><div class="text-sm text-muted font-medium mt-1">Hidden charges, ever</div></div>
+      <div><div class="font-display text-3xl font-semibold text-pine">45 min</div><div class="text-sm text-muted font-medium mt-1">Avg. support response</div></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="bg-cream2/60 border-y border-stonewarm">
+    <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-16 lg:py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <div class="label-eyebrow text-moss mb-2">05 — How it works</div>
+        <h2 class="font-display text-3xl lg:text-[44px] font-semibold tracking-tight leading-tight">From daydream<br/>to departure in 4 steps</h2>
+        <div class="mt-8 space-y-0" id="howSteps"></div>
+        <button onclick="navigate('explore')" class="btn-primary px-7 py-3.5 text-sm mt-8">Start planning →</button>
+      </div>
+      <div class="relative reveal">
+        <div class="rounded-[28px] overflow-hidden shadow-lift img-zoom"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1200&auto=format&fit=crop" class="w-full h-[520px] object-cover" alt="Kerala"/></div>
+        <div class="absolute -bottom-6 -left-4 lg:-left-8 bg-white rounded-2xl shadow-lift p-5 flex items-center gap-4 max-w-[320px] float-soft"><div class="w-12 h-12 rounded-full bg-mosslight flex items-center justify-center text-moss font-extrabold">✓</div><div><div class="font-extrabold text-sm">Concierge confirmed</div><div class="text-xs text-muted mt-0.5">Meera just personalised your Kerala route · 2 min ago</div></div></div>
+        <div class="absolute -top-5 -right-3 lg:-right-5 bg-pine text-white rounded-2xl shadow-lift px-5 py-4 float-soft" style="animation-delay:1.2s"><div class="text-xs opacity-70 font-semibold">Starting from</div><div class="font-display text-2xl">₹24,500 <span class="text-sm font-sans font-medium opacity-70">/ person</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-16 lg:py-24">
+    <div class="flex items-end justify-between mb-8 reveal"><div><div class="label-eyebrow text-moss mb-2">06 — Traveller stories</div><h2 class="font-display text-3xl lg:text-[44px] font-semibold tracking-tight">Arrived in joy, literally</h2></div><div class="hidden sm:flex gap-2"><button onclick="testiMove(-1)" class="w-11 h-11 rounded-full border border-stonewarm bg-white">←</button><button onclick="testiMove(1)" class="w-11 h-11 rounded-full bg-pine text-white">→</button></div></div>
+    <div class="grid md:grid-cols-3 gap-5" id="testiGrid"></div>
+    <div class="flex justify-center gap-2 mt-7" id="testiDots"></div>
+  </div>
+
+  <!-- JOURNAL -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pb-16">
+    <div class="flex items-end justify-between mb-7 reveal"><div><div class="label-eyebrow text-moss mb-2">07 — Travel inspiration</div><h2 class="font-display text-3xl lg:text-[40px] font-semibold tracking-tight">Notes from the road</h2></div><button class="btn-outline px-6 py-3 text-sm hidden sm:block">All stories</button></div>
+    <div class="grid md:grid-cols-3 gap-5" id="journalGrid"></div>
+  </div>
+
+  <!-- FINAL CTA -->
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pb-20">
+    <div class="relative rounded-[30px] overflow-hidden grain reveal">
+      <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Mountains"/>
+      <div class="absolute inset-0 bg-pinedark/70"></div>
+      <div class="relative px-7 py-14 lg:p-20 text-center text-white max-w-3xl mx-auto">
+        <div class="label-eyebrow text-sand mb-3">Begin your yatra</div>
+        <h2 class="font-display text-3xl lg:text-5xl font-semibold leading-tight">Your most comfortable<br/>adventure is one click away</h2>
+        <p class="text-white/75 mt-4">Free consultation · Flexible cancellation · EMI available · Customisable everything</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3 mt-8"><button onclick="navigate('explore')" class="btn-gold px-8 py-4 text-sm">Find my journey →</button><button onclick="openConcierge()" class="btn-ghostlight px-8 py-4 text-sm">☎ &nbsp; 1800-419-2026 (Toll-free)</button></div>
+        <div class="mt-6 text-xs text-white/60 font-medium">★ Rated Excellent · IATA accredited · Govt. of India approved tour operator</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EXPLORE ================= -->
+<section id="page-explore" class="page">
+  <div class="bg-pinedark text-white grain relative overflow-hidden">
+    <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-25" alt=""/>
+    <div class="absolute inset-0 bg-gradient-to-b from-pinedark/40 to-pinedark"></div>
+    <div class="relative max-w-[1280px] mx-auto px-5 lg:px-8 py-12 lg:py-16">
+      <div class="label-eyebrow text-sand mb-2">Explore · 48 curated journeys</div>
+      <h1 class="font-display text-4xl lg:text-6xl font-semibold tracking-tight">Find your kind<br/>of <span class="italic text-sandlight">slow adventure</span></h1>
+      <div class="mt-7 bg-white rounded-2xl p-3 flex flex-col md:flex-row gap-2 max-w-4xl text-ink">
+        <div class="flex-1 flex items-center gap-2 bg-cream2 rounded-xl px-4"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7572" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="exploreSearch" oninput="applyExploreFilters()" placeholder="Search Kerala, Ladakh, honeymoon, trek…" class="bg-transparent w-full py-3 outline-none text-sm font-medium"/></div>
+        <select id="exploreRegion" onchange="applyExploreFilters()" class="input !w-full md:!w-48 !bg-cream2 !border-0 font-bold text-sm"><option value="">All regions</option><option>North</option><option>South</option><option>West</option><option>East</option><option>Islands</option></select>
+        <select id="exploreSort" onchange="applyExploreFilters()" class="input !w-full md:!w-52 !bg-cream2 !border-0 font-bold text-sm"><option value="pop">Sort: Most loved</option><option value="low">Price: Low → High</option><option value="high">Price: High → Low</option><option value="rate">Highest rated</option><option value="dur">Shortest first</option></select>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-8 grid lg:grid-cols-[280px_1fr] gap-8">
+    <!-- filters -->
+    <aside class="hidden lg:block"><div class="bg-white rounded-3xl border border-stonewarm p-6 sticky top-24 shadow-card">
+      <div class="flex items-center justify-between mb-5"><h3 class="font-extrabold">Filters</h3><button onclick="resetFilters()" class="text-xs font-bold text-moss underline">Reset all</button></div>
+      <div class="label-eyebrow text-muted mb-3">Travel theme</div><div id="themeChips" class="flex flex-wrap gap-2 mb-6"></div>
+      <div class="label-eyebrow text-muted mb-3">Duration</div><div id="durChips" class="flex flex-wrap gap-2 mb-6"></div>
+      <div class="label-eyebrow text-muted mb-3">Budget per person</div><input id="budgetRange" type="range" min="15000" max="70000" value="70000" step="1000" oninput="applyExploreFilters()" class="w-full"/><div class="flex justify-between text-xs font-bold mt-1"><span>₹15k</span><span id="budgetLabel" class="text-moss">Up to ₹70k</span></div>
+      <div class="label-eyebrow text-muted mt-6 mb-3">Rating</div><div class="space-y-2 text-sm font-semibold" id="ratingFilters"><label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" value="4.8" onchange="applyExploreFilters()" class="accent-[#0E3B34] w-4 h-4 ratingChk"/> 4.8+ Exceptional</label><label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" value="4.6" onchange="applyExploreFilters()" class="accent-[#0E3B34] w-4 h-4 ratingChk"/> 4.6+ Excellent</label></div>
+      <div class="mt-6 bg-mosslight rounded-2xl p-4"><div class="font-extrabold text-sm text-pine">Need help choosing?</div><div class="text-xs text-pine/70 mt-1 leading-relaxed">Our travel designers reply within 2 hours.</div><button onclick="openConcierge()" class="btn-primary w-full py-2.5 text-xs mt-3">Chat with expert</button></div>
+    </div></aside>
+    <!-- mobile filter bar -->
+    <div class="lg:hidden flex gap-2 overflow-x-auto no-scrollbar -mx-5 px-5" id="mobileThemeChips"></div>
+    <div>
+      <div class="flex items-center justify-between mb-5"><div id="exploreCount" class="font-bold text-sm"></div><button onclick="document.getElementById('mobileFilterSheet').classList.remove('hidden')" class="lg:hidden btn-outline px-4 py-2 text-xs font-bold">☰ Filters</button></div>
+      <div id="exploreGrid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+      <div id="exploreEmpty" class="hidden text-center py-20 bg-white rounded-3xl border border-stonewarm"><div class="text-5xl mb-3">🧭</div><h3 class="font-display text-2xl">No journeys match that</h3><p class="text-muted text-sm mt-2">Try widening your budget or clearing a theme.</p><button onclick="resetFilters()" class="btn-primary px-6 py-3 text-sm mt-5">Clear filters</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DESTINATION ================= -->
+<section id="page-destination" class="page"><div id="destContent"></div></section>
+
+<!-- ================= PACKAGE ================= -->
+<section id="page-package" class="page"><div id="packageContent"></div><div class="lg:hidden fixed bottom-0 left-0 right-0 z-[90] bg-white/95 backdrop-blur border-t border-stonewarm p-3 px-5 flex items-center justify-between gap-3" id="mobileBookBar" style="display:none"><div><div class="text-[11px] text-muted font-bold">Starting from</div><div class="font-extrabold text-lg" id="mobileBookPrice"></div></div><button onclick="startBooking(currentPackageId)" class="btn-primary px-8 py-3.5 text-sm flex-1">Check availability</button></div></section>
+
+<!-- ================= BOOKING ================= -->
+<section id="page-booking" class="page">
+  <div class="max-w-[1100px] mx-auto px-5 lg:px-8 py-10">
+    <button onclick="openPackage(currentPackageId)" class="text-sm font-bold text-muted mb-5">← Back to trip</button>
+    <div class="grid lg:grid-cols-[1fr_360px] gap-8">
+      <div>
+        <h1 class="font-display text-3xl lg:text-4xl font-semibold">Complete your booking</h1><p class="text-muted text-sm mt-1">Free cancellation for 48 hours · No payment charged today for Pay Later</p>
+        <div class="flex items-center gap-1 mt-7 mb-8" id="bookingStepsBar"></div>
+        <div id="bookingStepBody" class="bg-white rounded-[24px] border border-stonewarm p-6 lg:p-8 shadow-card"></div>
+      </div>
+      <div><div class="bg-pinedark text-white rounded-[24px] p-6 sticky top-24" id="bookingSummary"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AUTH ================= -->
+<section id="page-auth" class="page">
+  <div class="max-w-[1180px] mx-auto px-5 lg:px-8 py-10">
+    <div class="grid lg:grid-cols-2 rounded-[28px] overflow-hidden border border-stonewarm bg-white shadow-lift min-h-[620px]">
+      <div class="relative hidden lg:block"><img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?q=80&w=1200&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover" alt="Varanasi"/><div class="absolute inset-0 bg-gradient-to-t from-pinedark via-pinedark/30 to-transparent"></div><div class="absolute bottom-0 p-10 text-white"><div class="badge bg-white/15 border border-white/25 text-white mb-4">Namaste, fellow yatri</div><h2 class="font-display text-4xl leading-tight">“SukhYatri remembered my mother's knee pain before I did.”</h2><div class="flex items-center gap-3 mt-5"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop" class="w-11 h-11 rounded-full object-cover border-2 border-sand"/><div><div class="font-bold text-sm">Shalini Menon, Kochi</div><div class="text-white/60 text-xs">Travelled to Spiti · ★★★★★</div></div></div></div></div>
+      <div class="p-7 lg:p-12">
+        <div class="flex bg-cream2 rounded-full p-1 mb-8 max-w-sm"><button id="tabLogin" onclick="authTab('login')" class="flex-1 py-2.5 rounded-full font-bold text-sm bg-pine text-white transition">Log in</button><button id="tabSignup" onclick="authTab('signup')" class="flex-1 py-2.5 rounded-full font-bold text-sm text-muted transition">Sign up</button></div>
+        <h1 id="authTitle" class="font-display text-3xl lg:text-4xl font-semibold">Welcome back, yatri</h1>
+        <p id="authSub" class="text-muted text-sm mt-2">Pick up right where your wanderlust left off.</p>
+        <div class="grid grid-cols-2 gap-3 mt-6"><button onclick="socialLogin('Google')" class="btn-outline py-3 text-sm font-bold flex items-center justify-center gap-2"><span class="w-5 h-5 rounded-full bg-[#EA4335] text-white text-[11px] flex items-center justify-center font-extrabold">G</span> Google</button><button onclick="socialLogin('Apple')" class="btn-outline py-3 text-sm font-bold">◉ Apple</button></div>
+        <div class="flex items-center gap-3 my-6"><div class="h-px bg-stonewarm flex-1"></div><span class="text-xs font-bold text-muted">OR WITH EMAIL</span><div class="h-px bg-stonewarm flex-1"></div></div>
+        <div id="signupNameWrap" class="hidden"><label class="label-eyebrow text-muted">Full name</label><input id="authName" class="input mt-2 mb-4" placeholder="Aarav Sharma"/></div>
+        <label class="label-eyebrow text-muted">Email address</label><input id="authEmail" class="input mt-2 mb-4" placeholder="you@example.com" value="ananya@example.com"/>
+        <label class="label-eyebrow text-muted">Password</label><div class="relative mt-2 mb-2"><input id="authPass" type="password" class="input pr-12" placeholder="••••••••" value="sukhyatri123"/><button onclick="togglePass()" class="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-moss">SHOW</button></div>
+        <div class="flex items-center justify-between text-xs font-semibold mb-6"><label class="flex items-center gap-2 text-muted"><input type="checkbox" checked class="accent-[#0E3B34]"/> Remember me</label><button class="text-moss">Forgot password?</button></div>
+        <div id="authError" class="hidden mb-4 text-sm font-semibold bg-[#FDECEC] text-[#B42318] rounded-xl px-4 py-3"></div>
+        <button onclick="submitAuth()" id="authBtn" class="btn-primary w-full py-4 text-[15px]">Log in →</button>
+        <div class="mt-4 text-xs text-muted bg-cream2 rounded-xl p-3 font-medium">Demo access — email <b>ananya@example.com</b> · password <b>sukhyatri123</b> &nbsp; <button onclick="fillDemo()" class="text-moss font-bold underline">Autofill</button></div>
+        <p class="text-[11px] text-muted mt-5 text-center leading-relaxed">By continuing you agree to SukhYatri's Terms & Privacy.<br/>Protected by 256-bit encryption.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MY TRIPS ================= -->
+<section id="page-trips" class="page"><div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-10" id="tripsContent"></div></section>
+
+<!-- ================= CONFIRMATION ================= -->
+<section id="page-confirmation" class="page"><div class="max-w-[900px] mx-auto px-5 py-12" id="confirmContent"></div></section>
+
+<!-- ================= ABOUT ================= -->
+<section id="page-about" class="page">
+  <div class="relative overflow-hidden bg-pinedark text-white grain"><img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1800&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-30" alt=""/><div class="absolute inset-0 bg-gradient-to-b from-pinedark/30 to-pinedark"></div><div class="relative max-w-[1280px] mx-auto px-5 lg:px-8 py-16 lg:py-24 text-center"><div class="label-eyebrow text-sand mb-3">Our story · Since 2019</div><h1 class="font-display text-4xl lg:text-6xl font-semibold tracking-tight max-w-3xl mx-auto leading-tight">We started with one Sumo, six strangers & a dream of <span class="italic text-sandlight">comfortable India</span></h1><p class="text-white/70 max-w-xl mx-auto mt-5">Sukh (comfort) + Yatri (traveller). Today 1.2 lakh yatris, 48 routes, one obsession — India, felt deeply, travelled softly.</p></div></div>
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-14 grid lg:grid-cols-2 gap-10 items-center">
+    <div><div class="label-eyebrow text-moss mb-2">Why we exist</div><h2 class="font-display text-3xl lg:text-4xl font-semibold">India is breathtaking. Getting around it shouldn't take your breath away.</h2><p class="text-muted mt-4 leading-relaxed">Our founders — a Ladakhi driver-turned-guide, a Kerala homestay host, and a Mumbai product designer — kept meeting travellers who loved India but dreaded its logistics. SukhYatri was born to fix the unsexy stuff: verified stays, rested drivers, honest timelines, doctors on call, and food your stomach trusts.</p><div class="grid grid-cols-3 gap-4 mt-7"><div class="bg-white border border-stonewarm rounded-2xl p-4 text-center"><div class="font-display text-2xl text-pine">2019</div><div class="text-xs font-bold text-muted">Founded in Kochi</div></div><div class="bg-white border border-stonewarm rounded-2xl p-4 text-center"><div class="font-display text-2xl text-pine">120+</div><div class="text-xs font-bold text-muted">Local partners</div></div><div class="bg-white border border-stonewarm rounded-2xl p-4 text-center"><div class="font-display text-2xl text-pine">28</div><div class="text-xs font-bold text-muted">States covered</div></div></div></div>
+    <div class="grid grid-cols-2 gap-4"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=800&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover"/><img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover mt-8"/><img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=800&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover -mt-8"/><img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=800&auto=format&fit=crop" class="rounded-3xl h-64 w-full object-cover"/></div>
+  </div>
+  <div class="bg-cream2/60 border-y border-stonewarm"><div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-14"><div class="label-eyebrow text-moss mb-2 text-center">Milestones</div><h2 class="font-display text-3xl font-semibold text-center mb-10">The road so far</h2><div class="grid md:grid-cols-4 gap-5" id="milestoneGrid"></div></div></div>
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-14"><div class="label-eyebrow text-moss mb-2 text-center">Values</div><h2 class="font-display text-3xl font-semibold text-center mb-8">What we refuse to compromise</h2><div class="grid sm:grid-cols-3 gap-5" id="valuesGrid"></div>
+  <div class="mt-12 bg-pine text-white rounded-[28px] p-8 lg:p-12 grid lg:grid-cols-2 gap-8 items-center"><div><h3 class="font-display text-3xl">Come, build the future of Indian travel with us</h3><p class="text-white/70 mt-3 text-sm">We're hiring travel designers, naturalists & engineers across Kochi, Delhi & remote.</p></div><div class="flex flex-col sm:flex-row gap-3 lg:justify-end"><button onclick="navigate('contact')" class="btn-gold px-7 py-3.5 text-sm">View open roles</button><button onclick="navigate('explore')" class="btn-ghostlight px-7 py-3.5 text-sm">Travel with us</button></div></div></div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="page-contact" class="page">
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-12 grid lg:grid-cols-[1fr_420px] gap-8">
+    <div class="bg-white rounded-[28px] border border-stonewarm p-7 lg:p-10 shadow-card">
+      <div class="label-eyebrow text-moss mb-2">Contact · Replies in ~2 hrs</div><h1 class="font-display text-4xl font-semibold">Namaste! How can we help?</h1><p class="text-muted text-sm mt-2">Custom route? Honeymoon tweak? Group of 30? Tell us everything.</p>
+      <div class="grid sm:grid-cols-2 gap-4 mt-7"><div><label class="label-eyebrow text-muted">First name *</label><input id="cFirst" class="input mt-2" placeholder="Ananya"/></div><div><label class="label-eyebrow text-muted">Last name</label><input id="cLast" class="input mt-2" placeholder="Sharma"/></div></div>
+      <div class="grid sm:grid-cols-2 gap-4 mt-4"><div><label class="label-eyebrow text-muted">Email *</label><input id="cEmail" class="input mt-2" placeholder="you@mail.com"/></div><div><label class="label-eyebrow text-muted">Phone</label><input id="cPhone" class="input mt-2" placeholder="+91 98200 00000"/></div></div>
+      <div class="mt-4"><label class="label-eyebrow text-muted">What’s this about?</label><div class="flex flex-wrap gap-2 mt-3" id="contactTopics"><button class="chip active">New booking</button><button class="chip">Customise a trip</button><button class="chip">Honeymoon</button><button class="chip">Corporate / MICE</button><button class="chip">Support</button></div></div>
+      <div class="mt-4"><label class="label-eyebrow text-muted">Message *</label><textarea id="cMsg" rows="4" class="input mt-2" placeholder="We’re 4 friends, want 6 days in Kerala in December, slow pace, great food…"></textarea></div>
+      <div id="contactErr" class="hidden mt-4 text-sm font-semibold bg-[#FDECEC] text-[#B42318] rounded-xl px-4 py-3"></div>
+      <button onclick="submitContact()" class="btn-primary w-full py-4 mt-6">Send message →</button>
+      <p class="text-[11px] text-muted mt-3 text-center">Prefer talking? Call 1800-419-2026 · 9am–9pm IST, all days</p>
+    </div>
+    <div class="space-y-5">
+      <div class="bg-pinedark text-white rounded-[24px] p-7"><h3 class="font-display text-2xl">Visit our studios</h3><div class="mt-5 space-y-4 text-sm"><div class="flex gap-3"><span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">◍</span><div><b>Kochi HQ</b><br/><span class="text-white/60">4th Floor, Marine Drive, Kochi 682031</span></div></div><div class="flex gap-3"><span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">◍</span><div><b>Delhi Studio</b><br/><span class="text-white/60">Hauz Khas Village, New Delhi 110016</span></div></div><div class="flex gap-3"><span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">✉</span><div><b>hello@sukhyatri.in</b><br/><span class="text-white/60">care@sukhyatri.in for on-trip help</span></div></div></div><button onclick="openConcierge()" class="btn-gold w-full py-3 text-sm mt-6">WhatsApp us instantly</button></div>
+      <div class="bg-white rounded-[24px] border border-stonewarm p-6"><h4 class="font-extrabold mb-4">Quick answers</h4><div class="space-y-3 text-sm" id="contactFaq"></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-pinedark text-white grain relative overflow-hidden mt-4">
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pt-14 pb-8 relative">
+    <div class="grid lg:grid-cols-[1.3fr_1fr_1fr_1.2fr] gap-10">
+      <div><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-sand flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 6 5 9.5 5 13.5A7 7 0 0 0 12 20.5A7 7 0 0 0 19 13.5C19 9.5 16 6 12 2Z" fill="#0E3B34"/></svg></div><div class="font-display text-2xl font-bold">Sukh<span class="text-sand">Yatri</span></div></div><p class="text-white/60 text-sm mt-4 leading-relaxed max-w-xs">Travel in Comfort. Arrive in Joy. Curated Indian journeys with handpicked stays, private drivers & 24×7 human support.</p><div class="flex gap-2 mt-5"><span class="badge bg-white/10 border border-white/15">IATA</span><span class="badge bg-white/10 border border-white/15">★ 4.9 · 8.2k reviews</span><span class="badge bg-sand text-ink">Govt. Approved</span></div></div>
+      <div><div class="label-eyebrow text-sand mb-4">Journeys</div><div class="space-y-2.5 text-sm text-white/70 font-medium"><button onclick="quickSearch('kerala')" class="block hover:text-white">Kerala Backwaters</button><button onclick="quickSearch('ladakh')" class="block hover:text-white">Ladakh Adventure</button><button onclick="quickSearch('rajasthan')" class="block hover:text-white">Royal Rajasthan</button><button onclick="quickSearch('andaman')" class="block hover:text-white">Andaman Escape</button><button onclick="navigate('explore')" class="block hover:text-white">All 48 trips →</button></div></div>
+      <div><div class="label-eyebrow text-sand mb-4">Company</div><div class="space-y-2.5 text-sm text-white/70 font-medium"><button onclick="navigate('about')" class="block hover:text-white">Our story</button><button onclick="navigate('contact')" class="block hover:text-white">Contact</button><button onclick="navigate('trips')" class="block hover:text-white">My trips</button><button onclick="toggleAdmin(true)" class="block hover:text-white">Partner login</button><button onclick="toast('Careers page coming soon — write to hello@sukhyatri.in','info')" class="block hover:text-white">Careers</button></div></div>
+      <div><div class="label-eyebrow text-sand mb-4">Get ₹1,500 off your first yatra</div><p class="text-white/60 text-sm">One thoughtful email a month. No spam, ever.</p><div class="flex gap-2 mt-4"><input id="newsEmail" placeholder="you@mail.com" class="input !bg-white/10 !border-white/15 !text-white placeholder:text-white/40 flex-1"/><button onclick="subscribeNews()" class="btn-gold px-5 py-3 text-sm shrink-0">Join</button></div><div class="flex gap-2 mt-5 text-[11px] font-bold text-white/50"><span class="border border-white/15 rounded-lg px-2 py-1">VISA</span><span class="border border-white/15 rounded-lg px-2 py-1">MASTERCARD</span><span class="border border-white/15 rounded-lg px-2 py-1">UPI</span><span class="border border-white/15 rounded-lg px-2 py-1">EMI</span></div></div>
+    </div>
+    <div class="border-t border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-white/50 font-medium"><span>© 2026 SukhYatri Travel Pvt. Ltd. · Kochi · Delhi · Bengaluru · CIN U63040KL2019PTC000000</span><span class="flex gap-4"><a class="hover:text-white cursor-pointer">Privacy</a><a class="hover:text-white cursor-pointer">Terms</a><a class="hover:text-white cursor-pointer">Cancellations</a></span></div>
+  </div>
+</footer>
+</div><!-- /customerApp -->
+
+<!-- ============ ADMIN APP ============ -->
+<div id="adminApp" class="hidden min-h-screen bg-[#EEF1EF]">
+  <div class="flex">
+    <aside id="adminSidebar" class="w-[260px] shrink-0 bg-[#0B1A17] text-white min-h-screen p-5 hidden md:flex flex-col sticky top-0 h-screen">
+      <div class="flex items-center gap-3 px-1 mb-8"><div class="w-10 h-10 rounded-xl bg-sand flex items-center justify-center font-display font-bold text-ink text-lg">S</div><div><div class="font-bold leading-none">SukhYatri</div><div class="text-[10px] tracking-[.2em] text-sand font-bold mt-1">ADMIN CONSOLE</div></div></div>
+      <div class="space-y-1 flex-1" id="adminNav">
+        <div class="admin-navitem active" data-admin="dashboard" onclick="adminGo('dashboard')"><span>◈</span> Dashboard</div>
+        <div class="admin-navitem" data-admin="bookings" onclick="adminGo('bookings')"><span>▣</span> Bookings <span class="ml-auto text-[11px] bg-clay text-white rounded-full px-2 py-0.5 font-bold" id="adminNotif">6</span></div>
+        <div class="admin-navitem" data-admin="packages" onclick="adminGo('packages')"><span>⬣</span> Packages</div>
+        <div class="admin-navitem" data-admin="customers" onclick="adminGo('customers')"><span>◉</span> Customers</div>
+        <div class="admin-navitem" data-admin="content" onclick="adminGo('content')"><span>✎</span> Content & Offers</div>
+      </div>
+      <div class="bg-white/5 rounded-2xl p-4 border border-white/10"><div class="text-xs font-bold text-sand">OCT REVENUE PACE</div><div class="font-display text-2xl mt-1">₹48.2L</div><div class="h-1.5 bg-white/10 rounded-full mt-3"><div class="h-full w-[72%] bg-sand rounded-full"></div></div><div class="text-[11px] text-white/50 mt-2 font-semibold">72% of ₹67L target</div></div>
+      <button onclick="toggleAdmin(false)" class="mt-4 w-full py-3 rounded-xl border border-white/15 text-sm font-bold hover:bg-white hover:text-ink transition">← Back to website</button>
+    </aside>
+    <div class="flex-1 min-w-0">
+      <div class="bg-white border-b border-[#DFE5E2] px-5 lg:px-8 py-4 flex items-center gap-3 sticky top-0 z-40">
+        <button class="md:hidden w-10 h-10 rounded-full bg-ink text-white" onclick="document.getElementById('adminSidebar').classList.toggle('hidden');document.getElementById('adminSidebar').classList.toggle('flex')">☰</button>
+        <div><div class="font-extrabold leading-none" id="adminTitle">Good morning, Aarav 👋</div><div class="text-xs text-muted font-medium mt-1">Tuesday, 6 Oct 2026 · Peak season · 14 departures today</div></div>
+        <div class="ml-auto flex items-center gap-3"><div class="hidden sm:flex items-center gap-2 bg-[#F2F4F3] rounded-full px-4 py-2.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7572" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input placeholder="Search booking, guest…" class="bg-transparent text-sm outline-none w-40"/></div><button onclick="toast('No new critical alerts. All departures on time.','success')" class="w-10 h-10 rounded-full bg-[#F2F4F3] relative">🔔<span class="absolute top-1 right-1 w-2.5 h-2.5 bg-clay rounded-full border-2 border-white"></span></button><div class="w-10 h-10 rounded-full bg-pine text-white flex items-center justify-center font-bold">A</div></div>
+      </div>
+      <div class="p-5 lg:p-8 max-w-[1150px]">
+        <!-- DASHBOARD -->
+        <div id="admin-dashboard" class="admin-page">
+          <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-4" id="adminKpis"></div>
+          <div class="grid lg:grid-cols-[1.6fr_1fr] gap-4 mt-4">
+            <div class="bg-white rounded-3xl border border-[#DFE5E2] p-6"><div class="flex items-center justify-between mb-4"><div><h3 class="font-extrabold">Revenue overview</h3><p class="text-xs text-muted">Last 8 weeks · in ₹ lakhs</p></div><div class="flex gap-2"><button class="chip active !text-xs" onclick="toast('Range updated','info')">8W</button><button class="chip !text-xs" onclick="toast('Range updated','info')">6M</button><button class="chip !text-xs" onclick="toast('Range updated','info')">1Y</button></div></div><div class="h-[260px]"><canvas id="revChart"></canvas></div></div>
+            <div class="bg-white rounded-3xl border border-[#DFE5E2] p-6"><h3 class="font-extrabold">Bookings by destination</h3><p class="text-xs text-muted mb-3">This month</p><div class="h-[220px] flex justify-center"><canvas id="donutChart"></canvas></div><div class="mt-4 space-y-2 text-xs font-bold" id="donutLegend"></div></div>
+          </div>
+          <div class="grid lg:grid-cols-[1.6fr_1fr] gap-4 mt-4">
+            <div class="bg-white rounded-3xl border border-[#DFE5E2] overflow-hidden"><div class="p-6 pb-3 flex items-center justify-between"><h3 class="font-extrabold">Recent bookings</h3><button onclick="adminGo('bookings')" class="text-xs font-bold text-moss">View all →</button></div><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-[11px] uppercase tracking-wider text-muted border-y border-[#EEF1EF]"><th class="px-6 py-3">Guest</th><th class="px-4 py-3">Trip</th><th class="px-4 py-3">Date</th><th class="px-4 py-3">Amount</th><th class="px-4 py-3">Status</th></tr></thead><tbody id="adminRecentBody"></tbody></table></div></div>
+            <div class="space-y-4"><div class="bg-[#0B1A17] text-white rounded-3xl p-6"><h4 class="font-extrabold text-sm">⚡ Needs attention</h4><div class="mt-4 space-y-3 text-sm" id="adminTasks"></div></div><div class="bg-white rounded-3xl border border-[#DFE5E2] p-6"><h4 class="font-extrabold text-sm mb-3">Live occupancy</h4><div class="space-y-3 text-xs font-bold" id="occupancyBars"></div></div></div>
+          </div>
+        </div>
+        <!-- BOOKINGS -->
+        <div id="admin-bookings" class="admin-page hidden">
+          <div class="flex flex-wrap items-center gap-3 mb-5"><h2 class="font-display text-3xl font-semibold">Bookings</h2><span class="badge bg-white border border-[#DFE5E2]" id="adminBookCount"></span><div class="ml-auto flex gap-2"><select id="adminStatusFilter" onchange="renderAdminBookings()" class="input !w-auto !py-2.5 text-sm font-bold"><option value="">All statuses</option><option>Confirmed</option><option>Pending</option><option>Cancelled</option></select><input id="adminBookSearch" oninput="renderAdminBookings()" placeholder="Search…" class="input !w-48 !py-2.5 text-sm"/></div></div>
+          <div class="bg-white rounded-3xl border border-[#DFE5E2] overflow-hidden"><div class="overflow-x-auto"><table class="w-full text-sm min-w-[760px]"><thead><tr class="text-left text-[11px] uppercase tracking-wider text-muted bg-[#F6F8F7]"><th class="px-6 py-4">Booking ID</th><th class="px-4 py-4">Guest</th><th class="px-4 py-4">Package</th><th class="px-4 py-4">Travel</th><th class="px-4 py-4">Total</th><th class="px-4 py-4">Status</th><th class="px-4 py-4">Action</th></tr></thead><tbody id="adminBookBody"></tbody></table></div></div>
+        </div>
+        <!-- PACKAGES -->
+        <div id="admin-packages" class="admin-page hidden">
+          <div class="flex items-center gap-3 mb-5"><h2 class="font-display text-3xl font-semibold">Packages</h2><button onclick="openPackageModal()" class="ml-auto btn-primary px-5 py-2.5 text-sm">+ New package</button></div>
+          <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4" id="adminPackGrid"></div>
+        </div>
+        <!-- CUSTOMERS -->
+        <div id="admin-customers" class="admin-page hidden">
+          <h2 class="font-display text-3xl font-semibold mb-5">Customers</h2>
+          <div class="grid sm:grid-cols-3 gap-4 mb-4" id="adminCustStats"></div>
+          <div class="bg-white rounded-3xl border border-[#DFE5E2] overflow-hidden"><table class="w-full text-sm min-w-[680px]"><thead><tr class="text-left text-[11px] uppercase tracking-wider text-muted bg-[#F6F8F7]"><th class="px-6 py-4">Customer</th><th class="px-4 py-4">Trips</th><th class="px-4 py-4">Lifetime value</th><th class="px-4 py-4">Tier</th><th class="px-4 py-4">Last active</th></tr></thead><tbody id="adminCustBody"></tbody></table></div>
+        </div>
+        <!-- CONTENT -->
+        <div id="admin-content" class="admin-page hidden">
+          <h2 class="font-display text-3xl font-semibold mb-5">Content & Offers</h2>
+          <div class="grid lg:grid-cols-2 gap-4">
+            <div class="bg-white rounded-3xl border border-[#DFE5E2] p-6"><h3 class="font-extrabold mb-1">Festive offer control</h3><p class="text-xs text-muted mb-4">Live on homepage announcement bar</p><label class="label-eyebrow text-muted">Coupon code</label><input value="SUKH15" class="input mt-2 mb-3 font-bold"/><label class="label-eyebrow text-muted">Discount %</label><input value="15" type="number" class="input mt-2 mb-4"/><div class="flex items-center justify-between bg-[#F2F4F3] rounded-xl px-4 py-3 text-sm font-bold"><span>Offer active</span><button id="offerToggle" onclick="this.classList.toggle('bg-moss');toast('Offer status updated','success')" class="w-12 h-7 rounded-full bg-moss relative transition"><span class="absolute top-1 left-1 w-5 h-5 bg-white rounded-full"></span></button></div><button onclick="toast('Offer published to website','success')" class="btn-primary w-full py-3 text-sm mt-4">Publish changes</button></div>
+            <div class="bg-white rounded-3xl border border-[#DFE5E2] p-6"><h3 class="font-extrabold mb-4">Homepage hero banner</h3><div class="rounded-2xl overflow-hidden mb-4"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop" class="h-40 w-full object-cover"/></div><label class="label-eyebrow text-muted">Headline</label><input value="Travel in Comfort. Arrive in Joy." class="input mt-2 mb-3"/><button onclick="toast('Hero updated','success')" class="btn-outline w-full py-3 text-sm font-bold">Update hero</button><div class="mt-5 pt-5 border-t border-[#EEF1EF]"><h4 class="font-extrabold text-sm mb-3">Journal drafts</h4><div class="space-y-2 text-sm font-semibold"><div class="flex justify-between bg-[#F6F8F7] rounded-xl px-4 py-3"><span>Monsoon in Munnar</span><span class="text-moss">Published</span></div><div class="flex justify-between bg-[#F6F8F7] rounded-xl px-4 py-3"><span>Spiti winter guide</span><span class="text-[#9A7410]">Draft</span></div></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE FILTER SHEET -->
+<div id="mobileFilterSheet" class="hidden fixed inset-0 z-[150]"><div class="absolute inset-0 bg-black/50" onclick="document.getElementById('mobileFilterSheet').classList.add('hidden')"></div><div class="absolute bottom-0 left-0 right-0 bg-cream rounded-t-[26px] p-6 max-h-[80vh] overflow-auto"><div class="flex items-center justify-between mb-4"><h3 class="font-extrabold text-lg">Filters</h3><button onclick="document.getElementById('mobileFilterSheet').classList.add('hidden')" class="w-9 h-9 rounded-full bg-white border border-stonewarm">✕</button></div><div class="label-eyebrow text-muted mb-2">Theme</div><div id="sheetThemeChips" class="flex flex-wrap gap-2 mb-5"></div><div class="label-eyebrow text-muted mb-2">Duration</div><div id="sheetDurChips" class="flex flex-wrap gap-2 mb-5"></div><button onclick="applyExploreFilters();document.getElementById('mobileFilterSheet').classList.add('hidden')" class="btn-primary w-full py-4 text-sm">Show results</button></div></div>
+
+<!-- GALLERY MODAL -->
+<div id="galleryModal" class="hidden fixed inset-0 z-[160]"><div class="absolute inset-0 bg-black/90" onclick="closeGallery()"></div><div class="absolute inset-4 lg:inset-10 bg-cream rounded-3xl overflow-auto p-5"><div class="flex items-center justify-between mb-4 sticky top-0 bg-cream py-2"><h3 class="font-display text-2xl">Gallery</h3><button onclick="closeGallery()" class="w-10 h-10 rounded-full bg-pine text-white">✕</button></div><div id="galleryGrid" class="grid sm:grid-cols-2 gap-4"></div></div></div>
+
+<!-- CONCIERGE MODAL -->
+<div id="conciergeModal" class="hidden fixed inset-0 z-[160] flex items-end sm:items-center justify-center p-0 sm:p-6"><div class="absolute inset-0 bg-black/55" onclick="closeConcierge()"></div><div class="relative bg-white w-full sm:max-w-md rounded-t-[26px] sm:rounded-[26px] p-7 toast-in"><div class="flex items-center gap-3 mb-2"><div class="w-12 h-12 rounded-full bg-pine text-white flex items-center justify-center font-display text-xl">M</div><div><div class="font-extrabold">Meera · Travel designer</div><div class="text-xs text-moss font-bold flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span> Online · replies instantly</div></div><button onclick="closeConcierge()" class="ml-auto w-9 h-9 rounded-full bg-cream2">✕</button></div><div class="bg-cream2 rounded-2xl p-4 text-sm mt-4"><b>Meera:</b> Namaste! Tell me your dates, group size & vibe — I'll craft 2–3 routes within 2 hours. Where are you dreaming of? 🏔️</div><div class="flex gap-2 mt-4"><input id="conciergeInput" placeholder="e.g. Kerala, 5 days, honeymoon…" class="input flex-1"/><button onclick="sendConcierge()" class="btn-primary px-5">➤</button></div><div class="flex gap-2 mt-3"><button onclick="toast('Callback scheduled in 30 mins','success');closeConcierge()" class="btn-outline flex-1 py-2.5 text-xs font-bold">Request callback</button><button onclick="toast('Opening WhatsApp…','info')" class="btn-outline flex-1 py-2.5 text-xs font-bold">WhatsApp</button></div></div></div>
+
+<!-- PACKAGE MODAL (admin) -->
+<div id="pkgModal" class="hidden fixed inset-0 z-[160] flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/55" onclick="document.getElementById('pkgModal').classList.add('hidden')"></div><div class="relative bg-white rounded-3xl p-7 w-full max-w-lg toast-in"><h3 class="font-display text-2xl mb-4">New package</h3><div class="grid grid-cols-2 gap-3"><input placeholder="Package title" class="input col-span-2" id="npTitle"/><select class="input"><option>Kerala</option><option>Ladakh</option><option>Rajasthan</option></select><input placeholder="Price ₹" class="input"/><input placeholder="Duration (e.g. 5N6D)" class="input"/><select class="input"><option>Slow & Relaxed</option><option>Adventure</option><option>Honeymoon</option></select></div><div class="flex gap-3 mt-5"><button onclick="document.getElementById('pkgModal').classList.add('hidden')" class="btn-outline flex-1 py-3 text-sm">Cancel</button><button onclick="document.getElementById('pkgModal').classList.add('hidden');toast('Package drafted — pending review','success')" class="btn-primary flex-1 py-3 text-sm">Create draft</button></div></div></div>
+
+<!-- PROCESSING OVERLAY -->
+<div id="processingOverlay" class="hidden fixed inset-0 z-[200] bg-pinedark/95 flex items-center justify-center p-6"><div class="text-center text-white"><div class="w-20 h-20 mx-auto rounded-full border-4 border-white/15 border-t-sand animate-spin"></div><h3 class="font-display text-2xl mt-6">Confirming your seats…</h3><p class="text-white/60 text-sm mt-2" id="processingText">Reserving handpicked stay · Assigning rested driver…</p></div></div>
+
+<script>
+/* ==================== DATA ==================== */
+const IMG = {
+  kerala:"https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1200&auto=format&fit=crop",
+  munnar:"https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=1200&auto=format&fit=crop",
+  taj:"https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=1200&auto=format&fit=crop",
+  jaipur:"https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1200&auto=format&fit=crop",
+  goa:"https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1200&auto=format&fit=crop",
+  varanasi:"https://images.unsplash.com/photo-1561361513-2d000a50f0dc?q=80&w=1200&auto=format&fit=crop",
+  udaipur:"https://images.unsplash.com/photo-1568495286054-c7850f7da8f2?q=80&w=1200&auto=format&fit=crop",
+  himalaya:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop",
+  spiti:"https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?q=80&w=1200&auto=format&fit=crop",
+  valley:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop",
+  andaman:"https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200&auto=format&fit=crop",
+  desert:"https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?q=80&w=1200&auto=format&fit=crop",
+  coorg:"https://images.unsplash.com/photo-1593693411515-c20261bcad6e?q=80&w=1200&auto=format&fit=crop",
+  ghat:"https://images.unsplash.com/photo-1567157577867-05ccb1388e66?q=80&w=1200&auto=format&fit=crop"
+};
+const DESTINATIONS=[
+  {id:'kerala',name:'Kerala',region:'South',image:IMG.kerala,tagline:'Slow backwaters & tea mist',rating:4.9,reviews:2314,trips:14,bestTime:'Oct – Mar',ideal:'6–8 days',priceFrom:24500,desc:'Drift on a private kettuvallam as kingfishers skim the water. Munnar’s tea gardens, Fort Kochi’s art cafés and Ayurvedic evenings — Kerala is India at its softest, and our most loved route for first-timers, honeymooners and slow travellers alike.',highlights:['Private AC houseboat with chef','Munnar tea estate stay','Kathakali & Kalaripayattu evening','Ayurvedic spa session included']},
+  {id:'ladakh',name:'Ladakh',region:'North',image:IMG.himalaya,tagline:'High passes, deeper silence',rating:4.8,reviews:1892,trips:11,bestTime:'May – Sep',ideal:'6–7 days',priceFrom:32900,desc:'Pangong’s impossible blue, Nubra’s dunes, monasteries floating in thin air. Our Ladakh runs with oxygen-equipped stays, acclimatisation-first itineraries and drivers who have done these passes a thousand times.',highlights:['Pangong lakeside camp','Khardung La crossing','Thiksey morning prayers','Oxygen-ready stays']},
+  {id:'rajasthan',name:'Royal Rajasthan',region:'West',image:IMG.jaipur,tagline:'Palaces, deserts & living forts',rating:4.9,reviews:2750,trips:16,bestTime:'Oct – Mar',ideal:'7–8 days',priceFrom:31500,desc:'Jaipur’s pink geometry, Udaipur’s lake palaces, Jodhpur’s blue lanes and a night under Thar stars. Heritage hotels, folk evenings and a private vintage-car old-city tour.',highlights:['Heritage haveli stays','Sam sand-dune luxury camp','Lake Pichola sunset cruise','Private Amber Fort tour']},
+  {id:'goa',name:'Goa',region:'West',image:IMG.goa,tagline:'Soul, sand & susegad',rating:4.7,reviews:1980,trips:9,bestTime:'Nov – Feb',ideal:'4–5 days',priceFrom:18900,desc:'Beyond the parties — Latin quarters, mangrove kayaking, Portuguese mansions and secret coves. Stay in a 120-year-old villa, learn feni appreciation, sail at dolphin hour.',highlights:['Heritage villa stay','Dolphin sailing trip','Fontainhas walk with historian','Beach shack hopping']},
+  {id:'varanasi',name:'Varanasi',region:'North',image:IMG.varanasi,tagline:'Where dawn feels eternal',rating:4.8,reviews:1430,trips:7,bestTime:'Oct – Mar',ideal:'3–4 days',priceFrom:16500,desc:'Sunrise on the Ganges, evening aarti from a private boat, silk weavers and hidden akhadas. Led by Banarasi scholars — spiritual without being preachy, comfortable without losing soul.',highlights:['Private sunrise boat','Ganga aarti VIP ghat access','Sarnath with scholar','Silk weaving village']},
+  {id:'udaipur',name:'Udaipur & Lakes',region:'West',image:IMG.udaipur,tagline:'Venice of the East',rating:4.8,reviews:1120,trips:6,bestTime:'Sep – Mar',ideal:'3–4 days',priceFrom:22500,desc:'Whitewashed ghats, rooftop dinners over Lake Pichola and Mewari hospitality. Perfect for proposals, anniversaries and slow honeymoon extensions.',highlights:['Lakeside palace stay','Rooftop Mewari dinner','Vintage car city tour','Pottery & miniature art']},
+  {id:'andaman',name:'Andaman',region:'Islands',image:IMG.andaman,tagline:'India’s clearest blues',rating:4.9,reviews:1654,trips:8,bestTime:'Oct – May',ideal:'5–6 days',priceFrom:34800,desc:'Radhanagar’s powder sand, scuba with turtles, sea-plane views and barefoot luxury. Seaplane transfers, PADI pros and beach resorts we inspect every season.',highlights:['Scuba with PADI pros','Radhanagar sunset picnic','Sea walk & kayaking','Cellular Jail light show']},
+  {id:'spiti',name:'Spiti Valley',region:'North',image:IMG.spiti,tagline:'The middle land expedition',rating:4.8,reviews:987,trips:6,bestTime:'Jun – Oct',ideal:'7–8 days',priceFrom:29500,desc:'1000-year-old monasteries, the world’s highest post office, fossil villages and Milky-Way nights. 4×4 convoys, satellite phones and homestays that feel like family.',highlights:['Key & Tabo monasteries','Chandratal camp night','Hikkim postcard moment','4×4 with expert crew']}
+];
+const PACKAGES=[
+  {id:'p1',title:'Kerala Slow Backwaters & Tea Trails',destId:'kerala',destName:'Kerala',days:7,nights:6,price:48500,mrp:56900,rating:4.9,reviewsCount:842,image:IMG.kerala,gallery:[IMG.kerala,IMG.munnar,IMG.coorg],themes:['Slow & Relaxed','Honeymoon','Family'],group:'2–12 guests',pickup:'Kochi Airport',bestseller:true,desc:'Houseboat, tea estates, Kochi art and Ayurveda — our signature slow journey.',highlights:['2N private premium houseboat with chef & sundeck','2N Munnar tea-estate bungalow with plantation walk','Kathakali show + Fort Kochi heritage walk','60-min Ayurvedic Abhyanga spa included','Private Innova + rested driver throughout'],itinerary:[{d:1,t:'Arrive in Kochi — Fort Kochi stories',s:'Seaside heritage hotel · Dinner included',x:'Airport pickup, Chinese fishing nets at sunset, Kathakali evening.'},{d:2,t:'Kochi → Alleppey · Board your houseboat',s:'Private AC houseboat · All meals',x:'Drift Vembanad lake, village canoe tour, chef-cooked Kerala sadhya.'},{d:3,t:'Backwaters at dawn → Munnar',s:'Tea bungalow · Breakfast + Dinner',x:'Sunrise cruise, drive to misty Munnar, tea tasting at Lockhart.'},{d:4,t:'Tea trails & spice gardens',s:'Tea bungalow · Breakfast',x:'Guided plantation trek, Eravikulam park, spice garden lunch.'},{d:5,t:'Munnar → Thekkady',s:'Spice resort · Breakfast',x:'Periyar boat safari, Kalari show, spice market stroll.'},{d:6,t:'Ayurveda & farewell dinner',s:'Kochi resort · Breakfast + Dinner',x:'Morning spa ritual, Mattancherry palace, farewell seafood dinner.'},{d:7,t:'Fly home, arrive in joy',s:'—',x:'Lazy breakfast, transfer to COK airport with lounge access.'}],inclusions:['6N handpicked stays (4★+ & heritage)','Daily breakfast + 4 dinners','Private AC Innova + driver','Houseboat with chef','Spa + all experiences listed'],exclusions:['Flights (we can add at cost)','Lunches & personal expenses','Travel insurance'],reviews:[{n:'Priya & Karthik',a:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop',r:5,d:'Dec 2025',t:'The houseboat crew remembered our anniversary without being told. Munnar bungalow felt like a movie. Zero stress — driver Raghu was family by day 3.'},{n:'Jonathan D.',a:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop',r:5,d:'Jan 2026',t:'Cleanest stays I have had in India. Timings were honest, no 6am forced sightseeing. The spa and food alone were worth it.'}]},
+  {id:'p2',title:'Ladakh High Adventure — Pangong & Nubra',destId:'ladakh',destName:'Ladakh',days:7,nights:6,price:52900,mrp:61500,rating:4.8,reviewsCount:623,image:IMG.himalaya,gallery:[IMG.himalaya,IMG.valley,IMG.spiti],themes:['Adventure','Family'],group:'4–14 guests',pickup:'Leh Airport',tag:'High demand',desc:'Acclimatised, oxygen-safe Ladakh with lakeside camps and monastery dawns.',highlights:['Acclimatisation-first itinerary with doctor on call','Pangong lakeside luxury camp (heated)','Nubra dunes + double-hump camel safari','Khardung La + Thiksey morning prayers','Oxygen cylinders in every vehicle'],itinerary:[{d:1,t:'Land in Leh · Rest & acclimatise',s:'Oxygen-ready hotel · Dinner',x:'No rushing. Shanti Stupa sunset, briefing by expedition lead.'},{d:2,t:'Leh local — monasteries & palace',s:'Leh hotel · Breakfast',x:'Thiksey, Hemis, Leh Palace with monk interaction.'},{d:3,t:'Leh → Nubra via Khardung La',s:'Nubra camp · All meals',x:'World’s highest motorable pass, Diskit Buddha, dunes at dusk.'},{d:4,t:'Turtuk border village',s:'Nubra camp · Breakfast + Dinner',x:'India’s last village, apricot trails, Balti lunch with family.'},{d:5,t:'Nubra → Pangong',s:'Lakeside camp · All meals',x:'Shyok route, lake arrival for golden hour, bonfire stories.'},{d:6,t:'Pangong sunrise → Leh',s:'Leh hotel · Breakfast',x:'3 Idiots point minus crowds, Chang La, farewell Ladakhi feast.'},{d:7,t:'Fly home',s:'—',x:'Morning transfer, oxygen check, priority boarding help.'}],inclusions:['6N stays with heating & oxygen','All inner-line permits','4×4 / Tempo + oxygen','Bonfire + cultural evening','Expedition lead + medic'],exclusions:['Flights to Leh','Lunches on road days','Adventure insurance'],reviews:[{n:'Rohan Mehta',a:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&auto=format&fit=crop',r:5,d:'Jul 2025',t:'My father is 62 and they paced everything perfectly. Pangong camp was warm even at -2°. Best organised trip of my life.'}]},
+  {id:'p3',title:'Royal Rajasthan — Palaces & Desert Stars',destId:'rajasthan',destName:'Rajasthan',days:8,nights:7,price:56400,mrp:68000,rating:4.9,reviewsCount:915,image:IMG.jaipur,gallery:[IMG.jaipur,IMG.udaipur,IMG.desert],themes:['Heritage & Culture','Honeymoon','Family'],group:'2–16 guests',pickup:'Jaipur Airport',bestseller:true,desc:'Jaipur, Jodhpur, Udaipur + luxury desert camp under Thar skies.',highlights:['Stay in 2 heritage havelis + lake palace','Sam dunes luxury camp with folk night','Lake Pichola private sunset cruise','Vintage-car old city tour in Jaipur','Block-print workshop with artisans'],itinerary:[{d:1,t:'Jaipur arrival — Pink City glow',s:'Heritage haveli · Dinner',x:'Hawa Mahal viewpoint, bazaar walk, rooftop dinner.'},{d:2,t:'Amber Fort & vintage car tour',s:'Heritage haveli · Breakfast',x:'Amber with private guide, City Palace, vintage Fiat ride.'},{d:3,t:'Jaipur → Jodhpur, blue city',s:'Hill-view hotel · Breakfast',x:'Mehrangarh Fort, jaswant thada, rooftop laal maas dinner.'},{d:4,t:'Jodhpur → Sam dunes',s:'Luxury camp · All meals',x:'Camel safari at sunset, Manganiyar folk night, stargazing.'},{d:5,t:'Desert sunrise → Udaipur',s:'Lakeside hotel · Breakfast',x:'Ranakpur temples en route, evening lakeside stroll.'},{d:6,t:'Udaipur palaces & cruise',s:'Lakeside hotel · Breakfast + Dinner',x:'City Palace, Saheliyon ki Bari, private Pichola cruise.'},{d:7,t:'Slow Udaipur — crafts & cafés',s:'Lakeside hotel · Breakfast',x:'Miniature painting, pottery, farewell Mewari thali.'},{d:8,t:'Fly home from Udaipur',s:'—',x:'Transfer with lounge access.'}],inclusions:['7N heritage + luxury stays','Daily breakfast + 3 dinners','Private sedan/SUV + driver','All monument guides','Desert camp activities'],exclusions:['Flights','Monument tickets (₹2-3k)','Lunches'],reviews:[{n:'Ananya Iyer',a:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop',r:5,d:'Nov 2025',t:'Felt like royalty without the stiffness. Desert camp night with folk music under stars — I cried a little. Flawless logistics.'}]},
+  {id:'p4',title:'Goa Soul & Sand — Beyond the Crowds',destId:'goa',destName:'Goa',days:5,nights:4,price:28900,mrp:34000,rating:4.7,reviewsCount:540,image:IMG.goa,gallery:[IMG.goa,IMG.coorg,IMG.andaman],themes:['Slow & Relaxed','Honeymoon'],group:'2–10 guests',pickup:'Goa Airport',desc:'Villas, secret coves, feni trails and dolphin-hour sailing.',highlights:['120-year-old Portuguese villa stay','Dolphin-hour private sail','Fontainhas walk with historian','Mangrove kayaking at dawn'],itinerary:[{d:1,t:'Land & slow down in Assagao',s:'Villa · Welcome dinner',x:'Pool, siesta, North Goa food crawl by night.'},{d:2,t:'Heritage & hidden beaches',s:'Villa · Breakfast',x:'Fontainhas, Reis Magos fort, Ashwem secret cove picnic.'},{d:3,t:'Dolphin sail + South Goa',s:'Beach resort · Breakfast',x:'Morning sail, Palolem kayaking, silent-noise party optional.'},{d:4,t:'Spice farm & feni trail',s:'Beach resort · Breakfast + Dinner',x:'Ponda spice lunch, feni distillery tasting, sunset cruise.'},{d:5,t:'Brunch & fly home',s:'—',x:'Lazy Goan brunch, flea market, transfer.'}],inclusions:['4N villa + resort','Daily breakfast + 2 dinners','Scooty / cab on call','All experiences listed'],exclusions:['Flights','Alcohol beyond tastings','Water sports'],reviews:[{n:'Sneha K.',a:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop',r:5,d:'Feb 2026',t:'Finally a Goa trip that was not Baga crowds. Villa was gorgeous, sail was magical.'}]},
+  {id:'p5',title:'Varanasi Spiritual Dawn',destId:'varanasi',destName:'Varanasi',days:4,nights:3,price:21500,mrp:26000,rating:4.8,reviewsCount:412,image:IMG.varanasi,gallery:[IMG.varanasi,IMG.ghat,IMG.taj],themes:['Spiritual','Heritage & Culture'],group:'2–12 guests',pickup:'Varanasi Airport',desc:'Ganga aarti, sunrise boats and silk lanes with Banarasi scholars.',highlights:['Private sunrise boat daily','VIP aarti access with scholar','Sarnath + silk village','Riverside heritage haveli stay'],itinerary:[{d:1,t:'Arrive · Evening aarti from boat',s:'Riverside haveli · Dinner',x:'Old city walk, private boat for Ganga aarti.'},{d:2,t:'Dawn boat + Sarnath',s:'Haveli · Breakfast',x:'Subah-e-Banaras, Sarnath stupa with scholar, silk weaving.'},{d:3,t:'Hidden Varanasi',s:'Haveli · Breakfast',x:'Akhada, kachori trail, weavers colony, evening free.'},{d:4,t:'Blessings & departure',s:'—',x:'Kashi Vishwanath darshan assistance, transfer.'}],inclusions:['3N haveli stay','Daily breakfast','Private boat + scholar guide','All transfers'],exclusions:['Flights','Temple offerings','Lunches'],reviews:[{n:'Meera Nair',a:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop',r:5,d:'Oct 2025',t:'Our guide Panditji made the Ganga feel personal. No touts, no rush. Deeply moving.'}]},
+  {id:'p6',title:'Andaman Blue Escape',destId:'andaman',destName:'Andaman',days:6,nights:5,price:54800,mrp:63900,rating:4.9,reviewsCount:488,image:IMG.andaman,gallery:[IMG.andaman,IMG.goa,IMG.coorg],themes:['Honeymoon','Adventure','Slow & Relaxed'],group:'2–10 guests',pickup:'Port Blair Airport',tag:'Honeymoon pick',desc:'Scuba, sea walks and powder beaches with barefoot luxury.',highlights:['Intro scuba with PADI pros','Radhanagar sunset picnic','Sea walk + night kayaking','Cellular Jail light & sound VIP'],itinerary:[{d:1,t:'Port Blair arrival',s:'Sea-view hotel · Dinner',x:'Cellular Jail show, harbour dinner.'},{d:2,t:'Ferry to Havelock',s:'Beach resort · Breakfast',x:'Makruzz premium ferry, Radhanagar beach evening.'},{d:3,t:'Scuba + Kalapathar',s:'Beach resort · Breakfast',x:'Morning dive, Kalapathar sunset, beach barbecue.'},{d:4,t:'Elephant Beach day',s:'Beach resort · Breakfast + Lunch',x:'Snorkel, sea walk, parasail optional.'},{d:5,t:'Neil Island day trip',s:'Sea-view hotel · Breakfast',x:'Natural bridge, Laxmanpur sunset, ferry back.'},{d:6,t:'Fly home',s:'—',x:'Transfer, souvenir stop.'}],inclusions:['5N beach stays','Ferry + transfers','Scuba + activities listed','Daily breakfast'],exclusions:['Flights','Dive photos (₹1500)','Water sports extras'],reviews:[{n:'Arjun & Divya',a:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop',r:5,d:'Jan 2026',t:'Honeymoon perfection. Dive team was so patient with my fear of water. Radhanagar picnic — unreal.'}]},
+  {id:'p7',title:'Spiti Valley Expedition 4×4',destId:'spiti',destName:'Spiti',days:8,nights:7,price:49500,mrp:58000,rating:4.8,reviewsCount:356,image:IMG.spiti,gallery:[IMG.spiti,IMG.valley,IMG.himalaya],themes:['Adventure'],group:'6–14 guests',pickup:'Chandigarh / Shimla',tag:'Expedition',desc:'Monasteries, fossil villages and Chandratal under Milky Way.',highlights:['4×4 convoy + satellite phone','Chandratal luxury camp night','Key, Tabo, Dhankar with monk tea','Hikkim — world’s highest post office'],itinerary:[{d:1,t:'Chandigarh → Shimla / Narkanda',s:'Mountain hotel · Dinner',x:'Assemble, briefing, acclimatise.'},{d:2,t:'→ Chitkul, last village',s:'Homestay · All meals',x:'Baspa valley, riverside evening.'},{d:3,t:'→ Kaza via Nako & Tabo',s:'Kaza hotel · All meals',x:'1000-yr Tabo monastery, Nako lake.'},{d:4,t:'Key, Kibber, Hikkim, Langza',s:'Kaza hotel · All meals',x:'Postcard from Hikkim, Buddha statue, fossil hunt.'},{d:5,t:'Dhankar + Pin Valley',s:'Homestay · All meals',x:'Cliff monastery, Kungri, local homestay dinner.'},{d:6,t:'→ Chandratal',s:'Luxury camp · All meals',x:'Kunzum pass, lake sunset, Milky Way shoot.'},{d:7,t:'→ Manali',s:'Hotel · Breakfast + Dinner',x:'Atal Tunnel, hot shower luxury, farewell.'},{d:8,t:'→ Chandigarh / fly',s:'—',x:'Transfer with memories + printed photo book.'}],inclusions:['7N stays + camps','4×4 + crew + medic','All meals on expedition','Permits + photo book'],exclusions:['Travel to Chandigarh','Personal gear','Insurance'],reviews:[{n:'Vikram Reddy',a:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop',r:5,d:'Aug 2025',t:'Chandratal night alone was worth every rupee. Crew handled a landslide delay calmly with hot maggi and music.'}]},
+  {id:'p8',title:'Munnar Tea & Mist Short Break',destId:'kerala',destName:'Kerala',days:4,nights:3,price:24800,mrp:29500,rating:4.8,reviewsCount:390,image:IMG.munnar,gallery:[IMG.munnar,IMG.kerala,IMG.coorg],themes:['Slow & Relaxed','Family','Honeymoon'],group:'2–8 guests',pickup:'Kochi Airport',desc:'Perfect long-weekend: tea bungalow, waterfalls & Kolukkumalai sunrise.',highlights:['Tea bungalow with fireplace','Kolukkumalai sunrise jeep','Attukad falls picnic','Tea factory + tasting'],itinerary:[{d:1,t:'Kochi → Munnar',s:'Bungalow · Dinner',x:'Cheeyappara falls, evening tea & fireplace.'},{d:2,t:'Kolukkumalai sunrise',s:'Bungalow · Breakfast',x:'4am jeep to world’s highest tea estate, factory tour.'},{d:3,t:'Eravikulam + Mattupetty',s:'Bungalow · Breakfast',x:'Nilgiri tahr, dam pedal boats, spice shopping.'},{d:4,t:'Return to Kochi',s:'—',x:'Transfer with lunch stop.'}],inclusions:['3N bungalow','Daily breakfast + 1 dinner','Private cab','All experiences'],exclusions:['Flights','Lunches','Park fees (~₹500)'],reviews:[{n:'Kavya S.',a:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop',r:5,d:'Sep 2025',t:'Booked Thursday, travelling Friday. Seamless. Kolukkumalai sunrise made us speechless.'}]},
+  {id:'p9',title:'Udaipur Lakeside Romance',destId:'udaipur',destName:'Udaipur',days:4,nights:3,price:32500,mrp:38900,rating:4.8,reviewsCount:298,image:IMG.udaipur,gallery:[IMG.udaipur,IMG.jaipur,IMG.taj],themes:['Honeymoon','Slow & Relaxed'],group:'2 guests',pickup:'Udaipur Airport',desc:'Palace stays, rooftop dinners and proposal-ready sunsets.',highlights:['Lake-view palace suite','Private Pichola sunset cruise','Candlelight rooftop dinner','Couple spa + photo shoot'],itinerary:[{d:1,t:'Arrive in Venice of East',s:'Palace hotel · Dinner',x:'Lakefront welcome, old city stroll.'},{d:2,t:'Palaces + private cruise',s:'Palace hotel · Breakfast + Dinner',x:'City Palace, vintage car, sunset cruise + dinner.'},{d:3,t:'Crafts + spa + shoot',s:'Palace hotel · Breakfast',x:'Miniature art, couple spa, professional shoot.'},{d:4,t:'Farewell brunch',s:'—',x:'Transfer with late checkout.'}],inclusions:['3N palace stay','Breakfast + 2 dinners','Cruise + spa + shoot','Private cab'],exclusions:['Flights','Shopping','Extra meals'],reviews:[{n:'Ishaan & Ritu',a:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=100&auto=format&fit=crop',r:5,d:'Dec 2025',t:'He proposed on the cruise — team had secretly decorated the boat. We will never forget this.'}]}
+];
+const EXPERIENCES=[
+  {t:'Private Houseboat Nights',d:'Chef, sundeck & fireflies on Vembanad',img:IMG.kerala},
+  {t:'Thar Desert Star Camp',d:'Folk music, dunes & Milky Way beds',img:IMG.desert},
+  {t:'Himalayan Monastery Dawns',d:'Prayers with monks at 12,000 ft',img:IMG.valley},
+  {t:'Ganga Aarti by Private Boat',d:'Front-row divinity, zero crowds',img:IMG.varanasi}
+];
+const TESTIMONIALS=[
+  {n:'Shalini & Deepak Menon',loc:'Kochi → Kerala Circuit',a:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=100&auto=format&fit=crop',r:5,t:'My mother walks slow and needs soft beds. SukhYatri planned every halt, every washroom, every meal around her — without making her feel like a burden. That is not a travel company, that is family.'},
+  {n:'Rohan Mehta',loc:'Mumbai → Ladakh',a:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop',r:5,t:'I have done Europe with big brands. Nothing prepared me for how smooth Ladakh felt — oxygen in cars, doctor on call, Pangong camp actually warm. Premium but worth every rupee.'},
+  {n:'Emily & James Carter',loc:'UK → Rajasthan',a:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop',r:5,t:'The vintage car tour, the folk night in the desert, the block-print workshop — every day had one moment we will tell our grandchildren about. India felt intimate, not intimidating.'},
+  {n:'Divya Krishnan',loc:'Bengaluru → Andaman',a:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop',r:5,t:'Honeymoon done right. Seaplane views, scuba with turtles, a sunset picnic with just us two. The team even handled my seasickness with such care. 10/10 would marry and go again.'},
+  {n:'Amit Verma',loc:'Delhi → Spiti',a:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop',r:5,t:'Landslide blocked our road for 6 hours. Crew had hot food, music, satellite updates to families. That day I understood what “travel in comfort” really means.'},
+  {n:'Farah Khan',loc:'Hyderabad → Varanasi',a:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop',r:5,t:'As a solo woman traveller I felt completely safe — female concierge on WhatsApp, verified stays, driver who waited outside every ghat. Varanasi changed me.'}
+];
+const JOURNAL=[
+  {t:'A slow guide to Kerala in December',c:'Itineraries · 8 min read',img:IMG.munnar,d:'Why 6 nights beats 4, which houseboat deck to pick, and the tea estate nobody tells you about.'},
+  {t:'Ladakh packing list from our expedition leads',c:'Guides · 5 min read',img:IMG.himalaya,d:'Oxygen, layers, boots and the one medicine every traveller forgets above 11,000 ft.'},
+  {t:'Is Andaman worth it in 2026? Honest costs',c:'Cost breakdowns · 6 min read',img:IMG.andaman,d:'Ferry vs seaplane, dive prices, and how to do 6 days under ₹55k without compromise.'}
+];
+
+/* ==================== STATE ==================== */
+let currentPage='home', currentPackageId='p1', currentDestId='kerala', wishlist=new Set(['p3']), currentUser=null, authMode='login', heroTravellers=2, testiIdx=0;
+let exploreFilters={theme:'',duration:'',region:'',search:'',sort:'pop',budget:70000,rating:0};
+let bookingState={step:1,pkg:null,date:'',slot:'Morning departure',room:'Deluxe',travellers:2,rooms:1,name:'',email:'',phone:'',notes:'',addons:[],coupon:'',payMethod:'upi',agree:false};
+let myBookings=[
+  {id:'SY-882341',pkgId:'p3',title:'Royal Rajasthan — Palaces & Desert Stars',image:IMG.jaipur,date:'18 Dec 2026',trav:'2 adults',total:112800,status:'Upcoming',loc:'Jaipur → Udaipur'},
+  {id:'SY-771209',pkgId:'p1',title:'Kerala Slow Backwaters & Tea Trails',image:IMG.kerala,date:'12 Aug 2025',trav:'4 adults',total:194000,status:'Completed',loc:'Kochi Circuit'}
+];
+let adminBookings=[
+  {id:'SY-992010',guest:'Aarav Sharma',phone:'+91 98200 11223',trip:'Kerala Slow Backwaters',date:'22 Oct 2026',amt:97000,status:'Confirmed'},
+  {id:'SY-992011',guest:'Emily Carter',phone:'+44 7700 900123',trip:'Royal Rajasthan',date:'24 Oct 2026',amt:112800,status:'Pending'},
+  {id:'SY-992012',guest:'Rohan Mehta',phone:'+91 98111 22334',trip:'Ladakh High Adventure',date:'28 Oct 2026',amt:105800,status:'Confirmed'},
+  {id:'SY-992013',guest:'Divya Krishnan',phone:'+91 99450 66778',trip:'Andaman Blue Escape',date:'02 Nov 2026',amt:109600,status:'Pending'},
+  {id:'SY-992014',guest:'Vikram Reddy',phone:'+91 90001 44556',trip:'Spiti Expedition',date:'05 Nov 2026',amt:99000,status:'Confirmed'},
+  {id:'SY-992015',guest:'Farah Khan',phone:'+91 99870 11223',trip:'Varanasi Dawn',date:'08 Nov 2026',amt:43000,status:'Cancelled'},
+  {id:'SY-992016',guest:'Jonathan D.',phone:'+1 415 555 0132',trip:'Goa Soul & Sand',date:'12 Nov 2026',amt:57800,status:'Confirmed'}
+];
+
+/* ==================== HELPERS ==================== */
+const $=id=>document.getElementById(id);
+const inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+function stars(r){let s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=Math.round(r)?'text-[#E8A93D]':'text-stonewarm'}">★</span>`;return `<span class="tracking-tight text-[14px]">${s}</span>`;}
+function toast(msg,type='success'){const colors={success:['#0E3B34','✓'],error:['#B42318','!'],info:['#147A70','i']};const [bg,ic]=colors[type]||colors.success;const el=document.createElement('div');el.className='toast-in bg-white rounded-2xl shadow-lift border border-stonewarm p-4 flex items-start gap-3';el.innerHTML=`<span class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0" style="background:${bg}">${ic}</span><div class="text-sm font-semibold leading-snug">${msg}</div>`;$('toasts').appendChild(el);setTimeout(()=>{el.style.transition='.4s';el.style.opacity='0';el.style.transform='translateY(10px)';setTimeout(()=>el.remove(),400)},3400);}
+function copyCode(c){navigator.clipboard&&navigator.clipboard.writeText(c);toast(`Code <b>${c}</b> copied — apply at checkout`);}
+function scrollRow(id,dir){$(id).scrollBy({left:dir*360,behavior:'smooth'});}
+function pkgById(id){return PACKAGES.find(p=>p.id===id);}
+function destById(id){return DESTINATIONS.find(d=>d.id===id);}
+function discount(p){return Math.round((1-p.price/p.mrp)*100);}
+
+/* ==================== NAV / ROUTER ==================== */
+function navigate(page,param){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  $('page-'+page).classList.add('active');
+  currentPage=page;
+  document.querySelectorAll('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));
+  $('mobileMenu').classList.add('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(page==='package'&&param)openPackage(param,true);
+  if(page==='destination'&&param)openDestination(param,true);
+  if(page==='trips')renderTrips();
+  if(page==='explore')applyExploreFilters();
+  setTimeout(observeReveals,100);
+}
+function toggleMobileMenu(){$('mobileMenu').classList.toggle('hidden');}
+function toggleAdmin(on){
+  $('customerApp').classList.toggle('hidden',on);
+  $('adminApp').classList.toggle('hidden',!on);
+  $('announceBar').style.display=on?'none':'';
+  window.scrollTo(0,0);
+  if(on){initAdminCharts();renderAdminAll();toast('Welcome back, Aarav — 6 bookings need review','info');}
+}
+function adminGo(tab){
+  document.querySelectorAll('.admin-navitem').forEach(n=>n.classList.toggle('active',n.dataset.admin===tab));
+  document.querySelectorAll('.admin-page').forEach(p=>p.classList.add('hidden'));
+  $('admin-'+tab).classList.remove('hidden');
+  const titles={dashboard:'Good morning, Aarav 👋',bookings:'Bookings control',packages:'Package inventory',customers:'Guest relationships',content:'Content & offers'};
+  $('adminTitle').textContent=titles[tab];
+}
+function openConcierge(){$('conciergeModal').classList.remove('hidden');}
+function closeConcierge(){$('conciergeModal').classList.add('hidden');}
+function sendConcierge(){const v=$('conciergeInput').value.trim();if(!v){toast('Tell us where you dream of going','error');return;}$('conciergeInput').value='';closeConcierge();toast(`Noted! Meera will send 2–3 <b>${v}</b> routes within 2 hours`);}
+function quickSearch(destId){exploreFilters.search='';const d=destById(destId);if(d){$('exploreSearch').value=d.name.split(' ')[0];}navigate('explore');applyExploreFilters();}
+function heroTrav(d){heroTravellers=Math.min(12,Math.max(1,heroTravellers+d));$('heroTravCount').textContent=heroTravellers;}
+function heroSearch(){exploreFilters.search=$('heroDest').value;$('exploreSearch').value=$('heroDest').value;const st=$('heroStyle').value;if(st)exploreFilters.theme=st;bookingState.travellers=heroTravellers;navigate('explore');toast(`Showing journeys for <b>${$('heroDest').value||'all India'}</b> · ${heroTravellers} travellers`);}
+
+/* ==================== RENDER: CARDS ==================== */
+function packageCard(p,compact=false){
+  const wished=wishlist.has(p.id);
+  return `<div class="bg-white rounded-[22px] overflow-hidden border border-stonewarm shadow-card card-hover snap-start min-w-[300px] lg:min-w-0 flex flex-col">
+    <div class="relative img-zoom h-[220px] cursor-pointer" onclick="navigate('package','${p.id}')">
+      <img src="${p.image}" class="w-full h-full object-cover" loading="lazy" alt="${p.title}"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"></div>
+      <button onclick="event.stopPropagation();toggleWish('${p.id}')" class="absolute top-3 right-3 w-9 h-9 rounded-full ${wished?'bg-clay text-white':'bg-white/90 text-ink'} flex items-center justify-center font-bold transition hover:scale-110">${wished?'♥':'♡'}</button>
+      <div class="absolute top-3 left-3 flex gap-2">${p.bestseller?'<span class="badge bg-sand text-ink">Bestseller</span>':''}${p.tag?`<span class="badge bg-white/90 text-pine">${p.tag}</span>`:''}</div>
+      <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between"><span class="badge bg-black/45 text-white border border-white/20 backdrop-blur">◷ ${p.nights}N / ${p.days}D</span><span class="badge bg-white text-pine font-extrabold">${discount(p)}% OFF</span></div>
+    </div>
+    <div class="p-5 flex flex-col flex-1">
+      <div class="flex items-center gap-2 text-[12px] font-bold text-muted"><span class="text-moss">● ${p.destName}</span><span>·</span><span>${p.group}</span></div>
+      <h3 class="font-display text-[20px] leading-snug font-semibold mt-1.5 cursor-pointer hover:text-moss transition" onclick="navigate('package','${p.id}')">${p.title}</h3>
+      <div class="flex items-center gap-2 mt-2 text-[13px]"><span class="font-extrabold">${p.rating}</span>${stars(p.rating)}<span class="text-muted font-medium">(${p.reviewsCount})</span></div>
+      <div class="flex flex-wrap gap-1.5 mt-3">${p.themes.slice(0,3).map(t=>`<span class="text-[11px] font-bold bg-cream2 text-pine rounded-full px-2.5 py-1">${t}</span>`).join('')}</div>
+      <div class="flex items-end justify-between mt-4 pt-4 border-t border-stonewarm mt-auto"><div><div class="text-[11px] text-muted line-through font-semibold">${inr(p.mrp)}</div><div class="font-extrabold text-[20px]">${inr(p.price)} <span class="text-[12px] font-semibold text-muted">/ person</span></div></div><button onclick="navigate('package','${p.id}')" class="btn-primary px-5 py-2.5 text-[13px]">View →</button></div>
+    </div></div>`;
+}
+function toggleWish(id){wishlist.has(id)?wishlist.delete(id):wishlist.add(id);toast(wishlist.has(id)?'Saved to your wishlist ♥':'Removed from wishlist','info');refreshDynamicGrids();if(currentPage==='trips')renderTrips();}
+function refreshDynamicGrids(){
+  document.querySelectorAll('#trendRow').forEach(el=>{el.innerHTML=PACKAGES.slice(0,6).map(p=>packageCard(p)).join('');});
+  applyExploreFilters();
+}
+
+/* ==================== HOME RENDER ==================== */
+function renderHome(){
+  $('homeDestGrid').innerHTML=DESTINATIONS.slice(0,4).map((d,i)=>`
+    <div class="relative rounded-[24px] overflow-hidden h-[420px] card-hover cursor-pointer img-zoom group reveal" onclick="navigate('destination','${d.id}')">
+      <img src="${d.image}" class="w-full h-full object-cover" loading="lazy" alt="${d.name}"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+      <div class="absolute top-4 left-4"><span class="badge bg-white/90 text-pine">${d.region} India</span></div>
+      <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center group-hover:bg-sand group-hover:text-ink transition font-bold">↗</div>
+      <div class="absolute bottom-0 p-5 text-white"><div class="flex items-center gap-1.5 text-[13px] font-bold"><span class="text-sand">★</span> ${d.rating} <span class="opacity-60 font-medium">(${d.reviews.toLocaleString()})</span></div><h3 class="font-display text-[26px] font-semibold mt-1">${d.name}</h3><p class="text-white/70 text-[13px] font-medium">${d.tagline}</p><div class="flex items-center justify-between mt-3 pt-3 border-t border-white/15"><span class="text-[13px] font-bold">${d.trips} trips · from ${inr(d.priceFrom)}</span><span class="text-[13px] font-bold text-sand">Explore →</span></div></div>
+    </div>`).join('');
+  $('trendRow').innerHTML=PACKAGES.slice(0,6).map(p=>packageCard(p)).join('');
+  $('expGrid').innerHTML=EXPERIENCES.map(e=>`<div class="rounded-3xl overflow-hidden relative h-[240px] group cursor-pointer img-zoom reveal" onclick="navigate('explore')"><img src="${e.img}" class="w-full h-full object-cover" loading="lazy"/><div class="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent"></div><div class="absolute bottom-0 p-5"><h4 class="font-display text-xl font-semibold">${e.t}</h4><p class="text-white/70 text-[13px] mt-1">${e.d}</p></div></div>`).join('');
+  const why=[['◈','Handpicked, inspected stays','We physically audit every hotel & houseboat each season. If the mattress isn’t great, it isn’t SukhYatri.'],['◎','Rested drivers, private cars','Max 6-hr drive days, verified vehicles, drivers who rest — safety stitched into every kilometre.'],['✦','Transparent, honest pricing','One price, everything listed. No “optional” surprises, no forced shopping stops. Ever.'],['♥','Humans on trip, 24×7','A real concierge on WhatsApp from pickup to drop. Doctors, mechanics, translators — one text away.']];
+  $('whyGrid').innerHTML=why.map(w=>`<div class="bg-white rounded-[22px] border border-stonewarm p-6 shadow-card card-hover reveal"><div class="w-12 h-12 rounded-2xl bg-pine text-sand font-display text-xl flex items-center justify-center">${w[0]}</div><h4 class="font-extrabold mt-4">${w[1]}</h4><p class="text-sm text-muted mt-2 leading-relaxed">${w[2]}</p></div>`).join('');
+  const steps=[['01','Tell us your vibe','2-min quiz or a call — dates, pace, budget, must-haves.'],['02','Get a crafted route','A designer sends 2–3 personalised options in 24 hrs. Tweak freely.'],['03','Book with ₹5,000 only','Lock seats with a token. Balance 15 days before travel. Free cancel 48 hrs.'],['04','Travel, we handle rest','Driver, stays, experiences & 24×7 support — you just look out the window.']];
+  $('howSteps').innerHTML=steps.map(s=>`<div class="step-item flex gap-5 relative"><div class="step-line relative shrink-0"><div class="w-[56px] h-[56px] rounded-2xl bg-white border border-stonewarm shadow-card flex items-center justify-center font-display font-bold text-pine text-lg relative z-10">${s[0]}</div></div><div class="pb-7"><h4 class="font-extrabold">${s[1]}</h4><p class="text-sm text-muted mt-1">${s[2]}</p></div></div>`).join('');
+  renderTestis();
+  $('journalGrid').innerHTML=JOURNAL.map(j=>`<div class="bg-white rounded-[22px] overflow-hidden border border-stonewarm shadow-card card-hover reveal cursor-pointer" onclick="toast('Full story opening in the Journal soon','info')"><div class="img-zoom h-[200px]"><img src="${j.img}" class="w-full h-full object-cover"/></div><div class="p-5"><div class="label-eyebrow text-clay">${j.c}</div><h4 class="font-display text-xl font-semibold mt-2 leading-snug">${j.t}</h4><p class="text-sm text-muted mt-2">${j.d}</p><span class="text-sm font-bold text-moss mt-3 inline-block">Read story →</span></div></div>`).join('');
+}
+let testiPage=0;
+function renderTestis(){
+  const per=3;const pages=Math.ceil(TESTIMONIALS.length/per);
+  const slice=TESTIMONIALS.slice(testiPage*per,testiPage*per+per);
+  $('testiGrid').innerHTML=slice.map(t=>`<div class="bg-white rounded-[22px] border border-stonewarm p-6 shadow-card card-hover flex flex-col"><div class="flex items-center gap-1">${stars(t.r)}<span class="ml-2 badge bg-mosslight text-moss">Verified trip</span></div><p class="text-[15px] leading-relaxed mt-4 flex-1">“${t.t}”</p><div class="flex items-center gap-3 mt-5 pt-5 border-t border-stonewarm"><img src="${t.a}" class="w-11 h-11 rounded-full object-cover"/><div><div class="font-extrabold text-sm">${t.n}</div><div class="text-xs text-muted">${t.loc}</div></div></div></div>`).join('');
+  $('testiDots').innerHTML=Array.from({length:pages}).map((_,i)=>`<span class="dot ${i===testiPage?'active':''}" onclick="testiPage=${i};renderTestis()"></span>`).join('');
+}
+function testiMove(d){const pages=Math.ceil(TESTIMONIALS.length/3);testiPage=(testiPage+d+pages)%pages;renderTestis();}
+
+/* ==================== EXPLORE ==================== */
+const THEMES=['Slow & Relaxed','Adventure','Heritage & Culture','Honeymoon','Family','Spiritual'];
+const DURS=[{l:'Short · 3–4 days',v:'short'},{l:'Classic · 5–6 days',v:'mid'},{l:'Grand · 7+ days',v:'long'}];
+function renderFilterChips(){
+  const mk=(list,sel,fn)=>list.map(t=>`<button class="chip ${sel===t?'active':''}" onclick="${fn}('${t.replace(/'/g,'')}')">${t}</button>`).join('');
+  $('themeChips').innerHTML=`<button class="chip ${!exploreFilters.theme?'active':''}" onclick="setTheme('')">All</button>`+THEMES.map(t=>`<button class="chip ${exploreFilters.theme===t?'active':''}" onclick="setTheme('${t}')">${t}</button>`).join('');
+  $('durChips').innerHTML=`<button class="chip ${!exploreFilters.duration?'active':''}" onclick="setDur('')">Any</button>`+DURS.map(d=>`<button class="chip ${exploreFilters.duration===d.v?'active':''}" onclick="setDur('${d.v}')">${d.l}</button>`).join('');
+  $('mobileThemeChips').innerHTML=`<button class="chip ${!exploreFilters.theme?'active':''}" onclick="setTheme('')">All</button>`+THEMES.map(t=>`<button class="chip ${exploreFilters.theme===t?'active':''}" onclick="setTheme('${t}')">${t}</button>`).join('');
+  $('sheetThemeChips').innerHTML=$('themeChips').innerHTML;$('sheetDurChips').innerHTML=$('durChips').innerHTML;
+}
+function setTheme(t){exploreFilters.theme=t;renderFilterChips();applyExploreFilters();}
+function setDur(d){exploreFilters.duration=d;renderFilterChips();applyExploreFilters();}
+function resetFilters(){exploreFilters={theme:'',duration:'',region:'',search:'',sort:'pop',budget:70000,rating:0};$('exploreSearch').value='';$('exploreRegion').value='';$('exploreSort').value='pop';$('budgetRange').value=70000;document.querySelectorAll('.ratingChk').forEach(c=>c.checked=false);renderFilterChips();applyExploreFilters();}
+function applyExploreFilters(){
+  exploreFilters.search=($('exploreSearch').value||'').toLowerCase();
+  exploreFilters.region=$('exploreRegion').value;
+  exploreFilters.sort=$('exploreSort').value;
+  exploreFilters.budget=+$('budgetRange').value;
+  $('budgetLabel').textContent='Up to '+inr(exploreFilters.budget).replace(',00','k');
+  const checked=[...document.querySelectorAll('.ratingChk')].filter(c=>c.checked).map(c=>+c.value);
+  exploreFilters.rating=checked.length?Math.min(...checked):0;
+  let list=PACKAGES.filter(p=>{
+    if(exploreFilters.search && !(p.title+' '+p.destName+' '+p.themes.join(' ')).toLowerCase().includes(exploreFilters.search))return false;
+    if(exploreFilters.region){const d=destById(p.destId);if(!d||d.region!==exploreFilters.region)return false;}
+    if(exploreFilters.theme&&!p.themes.includes(exploreFilters.theme))return false;
+    if(exploreFilters.duration){if(exploreFilters.duration==='short'&&p.days>4)return false;if(exploreFilters.duration==='mid'&&(p.days<5||p.days>6))return false;if(exploreFilters.duration==='long'&&p.days<7)return false;}
+    if(p.price>exploreFilters.budget)return false;
+    if(exploreFilters.rating&&p.rating<exploreFilters.rating)return false;
+    return true;
+  });
+  if(exploreFilters.sort==='low')list.sort((a,b)=>a.price-b.price);
+  if(exploreFilters.sort==='high')list.sort((a,b)=>b.price-a.price);
+  if(exploreFilters.sort==='rate')list.sort((a,b)=>b.rating-a.rating);
+  if(exploreFilters.sort==='dur')list.sort((a,b)=>a.days-b.days);
+  $('exploreCount').innerHTML=`<span class="text-pine">${list.length} journeys</span> <span class="text-muted font-medium">· handpicked for you</span>`;
+  $('exploreGrid').innerHTML=list.map(p=>packageCard(p)).join('');
+  $('exploreEmpty').classList.toggle('hidden',list.length>0);
+}
+
+/* ==================== DESTINATION PAGE ==================== */
+function openDestination(id,skipNav){
+  currentDestId=id;const d=destById(id);if(!d)return;
+  const pkgs=PACKAGES.filter(p=>p.destId===id);
+  const others=DESTINATIONS.filter(x=>x.id!==id).slice(0,3);
+  $('destContent').innerHTML=`
+  <div class="relative h-[52vh] lg:h-[62vh] overflow-hidden"><img src="${d.image}" class="w-full h-full object-cover" alt="${d.name}"/><div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/30"></div>
+    <div class="absolute bottom-0 max-w-[1280px] mx-auto px-5 lg:px-8 pb-10 left-0 right-0 text-white">
+      <button onclick="navigate('explore')" class="text-[13px] font-bold text-white/70 mb-3">← All destinations</button>
+      <div class="flex flex-wrap gap-2 mb-3"><span class="badge bg-sand text-ink">${d.region} India</span><span class="badge bg-white/15 border border-white/25 text-white">Best: ${d.bestTime}</span><span class="badge bg-white/15 border border-white/25 text-white">Ideal: ${d.ideal}</span></div>
+      <h1 class="font-display text-5xl lg:text-7xl font-semibold tracking-tight">${d.name}</h1><p class="text-white/80 mt-2 text-lg font-medium">${d.tagline}</p>
+      <div class="flex flex-wrap items-center gap-4 mt-5"><span class="flex items-center gap-2 font-bold"><span class="text-sand text-lg">★</span> ${d.rating} <span class="font-medium text-white/60">(${d.reviews.toLocaleString()} reviews)</span></span><span class="w-px h-5 bg-white/25"></span><span class="font-semibold text-sm">${d.trips} curated trips · from <b>${inr(d.priceFrom)}</b></span><button onclick="quickSearch('${d.id}')" class="btn-gold px-6 py-3 text-sm ml-auto hidden sm:inline-flex">View ${d.trips} trips →</button></div>
+    </div></div>
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 py-12 grid lg:grid-cols-[1.5fr_1fr] gap-10">
+    <div>
+      <div class="label-eyebrow text-moss mb-2">Why ${d.name} with SukhYatri</div>
+      <h2 class="font-display text-3xl font-semibold leading-tight">Slow mornings, soft beds,<br/>and stories you’ll retell for years.</h2>
+      <p class="text-[#3A4542] leading-relaxed mt-4">${d.desc}</p>
+      <div class="grid sm:grid-cols-2 gap-3 mt-6">${d.highlights.map(h=>`<div class="flex items-start gap-3 bg-white border border-stonewarm rounded-2xl p-4"><span class="w-8 h-8 rounded-full bg-mosslight text-moss flex items-center justify-center font-bold shrink-0">✓</span><span class="text-sm font-semibold">${h}</span></div>`).join('')}</div>
+      <h3 class="font-display text-2xl font-semibold mt-10 mb-5">Signature moments in ${d.name}</h3>
+      <div class="grid sm:grid-cols-2 gap-4">${[0,1,2,3].map(i=>{const imgs=[d.image,IMG.valley,IMG.coorg,IMG.desert];const titles=['Private dawn experience','Local family lunch','Craft & culture walk','Golden-hour viewpoint'];return `<div class="rounded-3xl overflow-hidden relative h-[220px] img-zoom group cursor-pointer" onclick="toast('Added to your interest list — designer will include it','success')"><img src="${imgs[i]}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 p-5 text-white"><div class="font-bold">${titles[i]}</div><div class="text-xs text-white/70">Hosted by local experts · included in most routes</div></div></div>`;}).join('')}</div>
+      <h3 class="font-display text-2xl font-semibold mt-10 mb-5">Popular ${d.name} packages ${pkgs.length?`(${pkgs.length})`:''}</h3>
+      <div class="grid sm:grid-cols-2 gap-5">${pkgs.length?pkgs.map(p=>packageCard(p)).join(''):`<div class="col-span-2 bg-white border border-stonewarm rounded-3xl p-8 text-center"><p class="text-muted text-sm">New ${d.name} routes are being crafted for this season.</p><button onclick="openConcierge()" class="btn-primary px-6 py-3 text-sm mt-4">Ask designer for custom route</button></div>`}</div>
+      <div class="mt-10 bg-cream2/70 border border-stonewarm rounded-3xl p-6"><h4 class="font-extrabold mb-4">Good to know</h4><div class="grid sm:grid-cols-3 gap-4 text-sm"><div><div class="label-eyebrow text-muted mb-1">Best time</div><b>${d.bestTime}</b></div><div><div class="label-eyebrow text-muted mb-1">Ideal length</div><b>${d.ideal}</b></div><div><div class="label-eyebrow text-muted mb-1">Starts at</div><b>${inr(d.priceFrom)} / person</b></div></div><p class="text-xs text-muted mt-4">All routes include verified stays, private car, daily breakfast & 24×7 concierge. Flights can be added at cost.</p></div>
+    </div>
+    <div><div class="bg-white rounded-[24px] border border-stonewarm p-6 shadow-card sticky top-24">
+      <h4 class="font-display text-2xl">Plan ${d.name}</h4><p class="text-sm text-muted mt-1">Free 15-min consult · No spam</p>
+      <input id="destLeadName" placeholder="Your name" class="input mt-4"/><input id="destLeadPhone" placeholder="Phone / WhatsApp" class="input mt-3"/><select class="input mt-3"><option>Travel month…</option><option>Oct 2026</option><option>Nov 2026</option><option>Dec 2026</option><option>Jan 2027</option></select>
+      <button onclick="destLead('${d.name}')" class="btn-primary w-full py-3.5 text-sm mt-4">Get custom itinerary →</button>
+      <div class="flex items-center gap-3 mt-5 pt-5 border-t border-stonewarm"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&auto=format&fit=crop" class="w-10 h-10 rounded-full object-cover"/><div class="text-xs"><b>Meera, ${d.name} specialist</b><br/><span class="text-moss font-bold">● Online</span> <span class="text-muted">· 214 trips designed</span></div></div>
+      <div class="mt-5 bg-pinedark text-white rounded-2xl p-5"><div class="text-xs font-bold text-sand">TRAVELLER TIP</div><p class="text-sm mt-1.5 leading-relaxed text-white/85">“Book ${d.bestTime.split('–')[0].trim()} departures — clearest skies, thinnest crowds, kindest prices.”</p></div>
+    </div></div>
+  </div>
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pb-16"><h3 class="font-display text-2xl font-semibold mb-5">Keep wandering</h3><div class="grid sm:grid-cols-3 gap-5">${others.map(o=>`<div class="relative rounded-3xl overflow-hidden h-[220px] cursor-pointer img-zoom card-hover" onclick="navigate('destination','${o.id}')"><img src="${o.image}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div class="absolute bottom-0 p-5 text-white"><div class="font-display text-xl font-semibold">${o.name}</div><div class="text-xs text-white/70">from ${inr(o.priceFrom)} · ★ ${o.rating}</div></div></div>`).join('')}</div></div>`;
+  if(!skipNav)navigate('destination');else{setTimeout(observeReveals,80);}
+}
+function destLead(name){const n=$('destLeadName').value.trim(),p=$('destLeadPhone').value.trim();if(!n||!p){toast('Please add your name & phone so Meera can call back','error');return;}toast(`Dhanyavaad, ${n}! Your <b>${name}</b> itinerary is being crafted — check WhatsApp shortly`);}
+
+/* ==================== PACKAGE PAGE ==================== */
+function openPackage(id,skipNav){
+  currentPackageId=id;const p=pkgById(id);if(!p)return;const d=destById(p.destId);
+  $('mobileBookBar').style.display='flex';$('mobileBookPrice').textContent=inr(p.price);
+  $('packageContent').innerHTML=`
+  <div class="max-w-[1280px] mx-auto px-5 lg:px-8 pt-6">
+    <div class="text-[13px] font-semibold text-muted mb-4"><span class="cursor-pointer hover:text-pine" onclick="navigate('home')">Home</span> / <span class="cursor-pointer hover:text-pine" onclick="navigate('explore')">Trips</span> / <span class="cursor-pointer hover:text-pine" onclick="navigate('destination','${p.destId}')">${p.destName}</span> / <span class="text-ink">${p.title}</span></div>
+    <div class="grid lg:grid-cols-[1.6fr_1fr] gap-3">
+      <div class="rounded-[24px] overflow-hidden img-zoom h-[300px] lg:h-[440px] cursor-pointer" onclick="openGallery('${p.id}')"><img src="${p.image}" class="w-full h-full object-cover"/></div>
+      <div class="grid grid-cols-2 lg:grid-cols-1 gap-3">
+        <div class="rounded-[24px] overflow-hidden img-zoom h-[145px] lg:h-[214px] cursor-pointer" onclick="openGallery('${p.id}')"><img src="${p.gallery[1]}" class="w-full h-full object-cover"/></div>
+        <div class="rounded-[24px] overflow-hidden relative h-[145px] lg:h-[214px] cursor-pointer" onclick="openGallery('${p.id}')"><img src="${p.gallery[2]}" class="w-full h-full object-cover"/><div class="absolute inset-0 bg-black/55 flex items-center justify-center text-white font-bold text-sm">+ View all photos</div></div>
+      </div>
+    </div>
+    <div class="grid lg:grid-cols-[1fr_380px] gap-10 mt-8 pb-24 lg:pb-16">
+      <div>
+        <div class="flex flex-wrap gap-2">${p.bestseller?'<span class="badge bg-sand text-ink">★ Bestseller</span>':''}${p.tag?`<span class="badge bg-mosslight text-moss">${p.tag}</span>`:''}${p.themes.map(t=>`<span class="badge bg-white border border-stonewarm text-muted">${t}</span>`).join('')}</div>
+        <h1 class="font-display text-3xl lg:text-[44px] leading-tight font-semibold mt-3 tracking-tight">${p.title}</h1>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-sm"><span class="font-extrabold text-lg">${p.rating}</span>${stars(p.rating)}<span class="text-muted font-medium underline cursor-pointer" onclick="document.getElementById('revSec').scrollIntoView({behavior:'smooth'})">${p.reviewsCount} reviews</span><span class="text-muted">·</span><span class="font-semibold">◷ ${p.nights}N / ${p.days}D</span><span class="text-muted">·</span><span class="font-semibold">👥 ${p.group}</span><span class="text-muted">·</span><span class="font-semibold">✈ Pickup: ${p.pickup}</span></div>
+        <p class="text-[#3A4542] mt-4 leading-relaxed">${p.desc} ${d?d.desc.split('.')[0]+'.':''}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">${[['Duration',p.nights+'N / '+p.days+'D'],['Group','2–14 guests'],['Stay','4★+ verified'],['Support','24×7 human']].map(x=>`<div class="bg-white border border-stonewarm rounded-2xl p-4 text-center"><div class="label-eyebrow text-muted">${x[0]}</div><div class="font-extrabold mt-1">${x[1]}</div></div>`).join('')}</div>
+        <div class="mt-8"><h2 class="font-display text-2xl font-semibold mb-4">Trip highlights</h2><div class="space-y-3">${p.highlights.map(h=>`<div class="flex items-start gap-3 bg-white border border-stonewarm rounded-2xl p-4"><span class="w-8 h-8 rounded-full bg-pine text-sand flex items-center justify-center font-bold shrink-0">✓</span><span class="text-[15px] font-medium">${h}</span></div>`).join('')}</div></div>
+        <div class="mt-10"><div class="flex items-center justify-between mb-4"><h2 class="font-display text-2xl font-semibold">Day-wise itinerary</h2><span class="badge bg-cream2 text-pine border border-stonewarm">${p.days} days · flexible</span></div><div class="space-y-3" id="itiAcc">${p.itinerary.map((it,i)=>`
+          <div class="acc bg-white border border-stonewarm rounded-2xl overflow-hidden ${i===0?'acc-open':''}"><button onclick="this.parentElement.classList.toggle('acc-open')" class="w-full flex items-center gap-4 p-5 text-left"><span class="w-11 h-11 rounded-2xl ${i===0?'bg-pine text-white':'bg-cream2 text-pine'} font-display font-bold shrink-0 flex items-center justify-center">D${it.d}</span><span class="flex-1"><span class="font-extrabold block">${it.t}</span><span class="text-xs text-muted font-semibold">🛏 ${it.s}</span></span><span class="acc-icon w-8 h-8 rounded-full bg-cream2 font-bold flex items-center justify-center shrink-0">+</span></button><div class="acc-body"><p class="px-5 pb-5 pl-[76px] text-sm text-[#3A4542] leading-relaxed">${it.x}</p></div></div>`).join('')}</div></div>
+        <div class="grid sm:grid-cols-2 gap-4 mt-8">
+          <div class="bg-mosslight rounded-3xl p-6"><h4 class="font-extrabold text-pine mb-3">✓ What’s included</h4><ul class="space-y-2 text-sm font-medium text-pine/90">${p.inclusions.map(x=>`<li class="flex gap-2"><span>✓</span>${x}</li>`).join('')}</ul></div>
+          <div class="bg-[#FFF4E8] rounded-3xl p-6"><h4 class="font-extrabold text-[#8A4A1F] mb-3">○ Not included</h4><ul class="space-y-2 text-sm font-medium text-[#8A4A1F]">${p.exclusions.map(x=>`<li class="flex gap-2"><span>○</span>${x}</li>`).join('')}</ul></div>
+        </div>
+        <div id="revSec" class="mt-10"><div class="flex items-center justify-between mb-4"><h2 class="font-display text-2xl font-semibold">Traveller reviews</h2><div class="flex items-center gap-2 bg-white border border-stonewarm rounded-full px-4 py-2 text-sm font-extrabold"><span class="text-lg">★</span> ${p.rating} <span class="text-muted font-medium">· ${p.reviewsCount} verified</span></div></div>
+        <div class="space-y-4">${p.reviews.map(r=>`<div class="bg-white border border-stonewarm rounded-3xl p-6"><div class="flex items-center gap-3"><img src="${r.a}" class="w-11 h-11 rounded-full object-cover"/><div><div class="font-extrabold text-sm">${r.n}</div><div class="text-xs text-muted">${r.d} · Verified booking</div></div><span class="ml-auto">${stars(r.r)}</span></div><p class="text-[15px] mt-3 leading-relaxed">“${r.t}”</p><div class="flex gap-4 mt-3 text-xs font-bold text-muted"><button onclick="toast('Thanks for your feedback!','success')" class="hover:text-pine">👍 Helpful</button><button onclick="toast('Review shared','info')" class="hover:text-pine">↗ Share</button></div></div>`).join('')}
+        <div class="bg-white border border-dashed border-stonewarm rounded-3xl p-6 text-center"><p class="text-sm font-semibold">Travelled with us? Your story helps the next yatri.</p><button onclick="toast('Review form opening after your trip ends','info')" class="btn-outline px-6 py-2.5 text-sm mt-3 font-bold">Write a review</button></div></div></div>
+        <div class="mt-8"><h2 class="font-display text-2xl font-semibold mb-4">Questions, answered</h2><div class="space-y-3">${[['Is this trip customisable?','Completely. Dates, hotels, pace, food — your designer tweaks everything before you pay the balance. 83% of our trips are modified in some way.'],['What is the cancellation policy?','Free cancellation for 48 hours after booking. Up to 15 days before travel: 90% refund. 7–15 days: 50% credit. We also offer one free date shift.'],['Are flights included?','Not by default, so you can use points or our fares — but we add them at transparent cost whenever you ask. Lounge access included on premium routes.']].map((f,i)=>`<div class="acc bg-white border border-stonewarm rounded-2xl overflow-hidden ${i===0?'acc-open':''}"><button onclick="this.parentElement.classList.toggle('acc-open')" class="w-full flex justify-between items-center p-5 font-bold text-left text-[15px]">${f[0]}<span class="acc-icon font-bold">+</span></button><div class="acc-body"><p class="px-5 pb-5 text-sm text-muted leading-relaxed">${f[1]}</p></div></div>`).join('')}</div></div>
+      </div>
+      <div><div class="bg-white rounded-[24px] border border-stonewarm p-6 shadow-lift sticky top-24 hidden lg:block">
+        <div class="flex items-start justify-between"><div><div class="text-xs text-muted line-through font-bold">${inr(p.mrp)} <span class="text-clay no-underline">· ${discount(p)}% off</span></div><div class="font-display text-[32px] font-semibold leading-none mt-1">${inr(p.price)}</div><div class="text-xs text-muted font-semibold mt-1">per person · on twin sharing</div></div><div class="text-right"><div class="font-extrabold">${p.rating} ★</div><div class="text-[11px] text-muted font-semibold">${p.reviewsCount} reviews</div></div></div>
+        <div class="bg-cream2 rounded-2xl p-4 mt-5 space-y-3 text-sm font-semibold"><div><label class="label-eyebrow text-muted">Departure date</label><input id="pkgDate" type="date" min="2026-10-10" value="2026-12-18" class="input mt-2"/></div><div><label class="label-eyebrow text-muted">Travellers</label><div class="flex items-center justify-between bg-white rounded-xl border border-stonewarm px-3 py-2 mt-2"><button onclick="pkgTrav(-1)" class="w-8 h-8 rounded-full bg-cream2 font-bold">−</button><span id="pkgTravCount" class="font-extrabold">2 adults</span><button onclick="pkgTrav(1)" class="w-8 h-8 rounded-full bg-pine text-white font-bold">+</button></div></div></div>
+        <div class="flex items-center gap-2 mt-3 text-[13px] font-bold text-moss"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse inline-block"></span> 6 seats left on Dec 18 departure</div>
+        <button onclick="startBooking('${p.id}')" class="btn-primary w-full py-4 mt-4">Check availability →</button>
+        <button onclick="openConcierge()" class="btn-outline w-full py-3.5 text-sm mt-2 font-bold">Ask a question first</button>
+        <div class="grid grid-cols-3 gap-2 mt-4 text-center text-[11px] font-bold text-muted"><div class="bg-cream rounded-xl py-2.5">✓ Free cancel<br/>48 hrs</div><div class="bg-cream rounded-xl py-2.5">✓ EMI from<br/>₹4,042/mo</div><div class="bg-cream rounded-xl py-2.5">✓ Pay only<br/>₹5k now</div></div>
+        <div class="flex items-center gap-3 mt-5 pt-5 border-t border-stonewarm"><div class="w-10 h-10 rounded-full bg-pine text-white flex items-center justify-center font-bold">M</div><div class="text-xs"><b>Meera can customise this</b><br/><span class="text-moss font-bold">● Online now</span></div><button onclick="openConcierge()" class="ml-auto text-xs font-bold text-moss underline">Chat</button></div>
+      </div></div>
+    </div>
+  </div>`;
+  if(!skipNav)navigate('package');else{setTimeout(observeReveals,80);window.scrollTo(0,0);}
+}
+let pkgTravN=2;
+function pkgTrav(d){pkgTravN=Math.min(12,Math.max(1,pkgTravN+d));$('pkgTravCount').textContent=pkgTravN+(pkgTravN===1?' adult':' adults');bookingState.travellers=pkgTravN;}
+function openGallery(id){const p=pkgById(id);const imgs=[p.image,...p.gallery,p.gallery[0],p.gallery[1]];$('galleryGrid').innerHTML=imgs.map((g,i)=>`<img src="${g}" class="rounded-2xl h-64 w-full object-cover"/>`).join('');$('galleryModal').classList.remove('hidden');}
+function closeGallery(){$('galleryModal').classList.add('hidden');}
+
+/* ==================== BOOKING FLOW ==================== */
+function startBooking(id){
+  if(!currentUser){toast('Please log in to continue booking — it takes 20 seconds','info');navigate('auth');return;}
+  const p=pkgById(id);bookingState={...bookingState,step:1,pkg:p,date:$('pkgDate')?$('pkgDate').value:'2026-12-18',travellers:pkgTravN||2,rooms:1,addons:[],coupon:'',payMethod:'upi'};
+  navigate('booking');renderBooking();
+}
+const ADDONS=[{id:'a1',t:'Private photographer (1 day)',p:6500,d:'200+ edited photos'},{id:'a2',t:'Couple spa ritual',p:4800,d:'60-min Ayurvedic, 2 guests'},{id:'a3',t:'Scuba / adventure upgrade',p:3500,d:'With certified pros'},{id:'a4',t:'Airport lounge + early check-in',p:1800,d:'Both ways'}];
+function bookingTotals(){
+  const b=bookingState,p=b.pkg;const base=p.price*b.travellers;
+  const addons=ADDONS.filter(a=>b.addons.includes(a.id)).reduce((s,a)=>s+a.p,0);
+  const roomUp=b.room==='Luxury'?8000*b.rooms:b.room==='Suite'?15000*b.rooms:0;
+  const sub=base+addons+roomUp;const disc=b.coupon==='SUKH15'?Math.round(sub*.15):0;
+  const taxes=Math.round((sub-disc)*.05);return{base,addons,roomUp,sub,disc,taxes,total:sub-disc+taxes};
+}
+function renderBooking(){
+  const b=bookingState,p=b.pkg;if(!p)return;
+  const steps=['Travellers','Trip options','Enhancements','Payment','Review'];
+  $('bookingStepsBar').innerHTML=steps.map((s,i)=>{const n=i+1;const done=n<b.step,act=n===b.step;return `<div class="flex items-center gap-2 flex-1 ${n<5?'':''}"><div class="flex items-center gap-2">${`<span class="w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-extrabold ${done?'bg-moss text-white':act?'bg-pine text-white':'bg-cream2 text-muted'}">${done?'✓':n}</span><span class="text-[12px] font-bold ${act?'text-pine':'text-muted'} hidden sm:block">${s}</span>`}</div>${n<5?'<div class="h-0.5 flex-1 bg-stonewarm rounded mx-1"><div class="h-full rounded '+(n<b.step?'bg-moss w-full':'bg-transparent')+'"></div></div>':''}</div>`;}).join('');
+  const t=bookingTotals();
+  $('bookingSummary').innerHTML=`
+    <div class="flex gap-4"><img src="${p.image}" class="w-20 h-20 rounded-2xl object-cover"/><div><div class="font-bold text-[15px] leading-snug">${p.title}</div><div class="text-white/60 text-xs mt-1 font-semibold">${p.nights}N/${p.days}D · ${p.destName} · ★ ${p.rating}</div></div></div>
+    <div class="mt-5 space-y-2.5 text-sm border-t border-white/10 pt-5">
+      <div class="flex justify-between text-white/70"><span>Base · ${b.travellers} traveller(s)</span><b class="text-white">${inr(t.base)}</b></div>
+      ${t.roomUp?`<div class="flex justify-between text-white/70"><span>Room upgrade</span><b class="text-white">${inr(t.roomUp)}</b></div>`:''}
+      ${t.addons?`<div class="flex justify-between text-white/70"><span>Enhancements</span><b class="text-white">${inr(t.addons)}</b></div>`:''}
+      ${t.disc?`<div class="flex justify-between text-sand"><span>Coupon SUKH15 (−15%)</span><b>−${inr(t.disc)}</b></div>`:''}
+      <div class="flex justify-between text-white/70"><span>Taxes & fees (5%)</span><b class="text-white">${inr(t.taxes)}</b></div>
+      <div class="flex justify-between items-center border-t border-white/10 pt-4"><span class="font-bold">Total</span><span class="font-display text-3xl">${inr(t.total)}</span></div>
+      <div class="text-[11px] text-white/50 font-semibold">Pay only ${inr(5000)} now · Rest 15 days before travel · Free cancel 48 hrs</div>
+    </div>
+    <div class="mt-5 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-white/70 leading-relaxed">🛡 <b class="text-white">SukhYatri Cover:</b> verified stays, rested drivers, on-trip doctor line & full refund if we cancel.</div>`;
+  let body='';
+  if(b.step===1)body=`
+    <h2 class="font-display text-2xl font-semibold">Who’s travelling?</h2><p class="text-sm text-muted mt-1">Lead traveller details — we’ll WhatsApp tickets here.</p>
+    <div class="grid sm:grid-cols-2 gap-4 mt-6"><div class="sm:col-span-2"><label class="label-eyebrow text-muted">Lead traveller name *</label><input id="bkName" value="${b.name||(currentUser?currentUser.name:'')}" class="input mt-2" placeholder="Full name as on ID"/></div>
+    <div><label class="label-eyebrow text-muted">Email *</label><input id="bkEmail" value="${b.email||(currentUser?currentUser.email:'')}" class="input mt-2" placeholder="you@mail.com"/></div>
+    <div><label class="label-eyebrow text-muted">Phone / WhatsApp *</label><input id="bkPhone" value="${b.phone}" class="input mt-2" placeholder="+91 …"/></div>
+    <div class="sm:col-span-2"><label class="label-eyebrow text-muted">Special requests <span class="normal-case font-medium">(anniversary, Jain food, knee support…)</span></label><textarea id="bkNotes" rows="2" class="input mt-2" placeholder="Anything that makes this trip yours…">${b.notes}</textarea></div></div>
+    <div class="flex gap-3 mt-7"><button onclick="saveStep1()" class="btn-primary flex-1 py-4 text-sm">Continue → Trip options</button></div>`;
+  if(b.step===2)body=`
+    <h2 class="font-display text-2xl font-semibold">Tune your trip</h2><p class="text-sm text-muted mt-1">Everything is flexible until final payment.</p>
+    <div class="grid sm:grid-cols-2 gap-4 mt-6"><div><label class="label-eyebrow text-muted">Departure date</label><input type="date" id="bkDate" value="${b.date}" min="2026-10-10" class="input mt-2"/></div>
+    <div><label class="label-eyebrow text-muted">Departure slot</label><select id="bkSlot" class="input mt-2"><option ${b.slot.includes('Morning')?'selected':''}>Morning departure</option><option ${b.slot.includes('Evening')?'selected':''}>Evening departure</option><option>Private charter</option></select></div>
+    <div><label class="label-eyebrow text-muted">Travellers</label><div class="flex items-center gap-4 bg-cream2 rounded-xl px-4 py-2.5 mt-2"><button onclick="bkTravCh(-1)" class="w-8 h-8 rounded-full bg-white border border-stonewarm font-bold">−</button><b id="bkTravV">${b.travellers}</b><button onclick="bkTravCh(1)" class="w-8 h-8 rounded-full bg-pine text-white font-bold">+</button></div></div>
+    <div><label class="label-eyebrow text-muted">Rooms</label><div class="flex items-center gap-4 bg-cream2 rounded-xl px-4 py-2.5 mt-2"><button onclick="bkRoomCh(-1)" class="w-8 h-8 rounded-full bg-white border border-stonewarm font-bold">−</button><b id="bkRoomV">${b.rooms}</b><button onclick="bkRoomCh(1)" class="w-8 h-8 rounded-full bg-pine text-white font-bold">+</button></div></div></div>
+    <label class="label-eyebrow text-muted mt-6 block">Stay category</label><div class="grid grid-cols-3 gap-3 mt-2">${['Deluxe','Luxury','Suite'].map(r=>`<button onclick="bookingState.room='${r}';renderBooking()" class="rounded-2xl border-2 p-4 text-center transition ${b.room===r?'border-pine bg-mosslight':'border-stonewarm bg-white'}"><div class="font-extrabold text-sm">${r}</div><div class="text-[11px] text-muted font-semibold mt-1">${r==='Deluxe'?'Included':r==='Luxury'?'+₹8k/room':'+₹15k/room'}</div></button>`).join('')}</div>
+    <div class="flex gap-3 mt-7"><button onclick="bookingState.step=1;renderBooking()" class="btn-outline px-6 py-4 text-sm">← Back</button><button onclick="saveStep2()" class="btn-primary flex-1 py-4 text-sm">Continue → Enhancements</button></div>`;
+  if(b.step===3)body=`
+    <h2 class="font-display text-2xl font-semibold">Make it unforgettable</h2><p class="text-sm text-muted mt-1">Handpicked add-ons, hosted by locals we trust.</p>
+    <div class="space-y-3 mt-6">${ADDONS.map(a=>{const on=b.addons.includes(a.id);return `<button onclick="toggleAddon('${a.id}')" class="w-full flex items-center gap-4 rounded-2xl border-2 p-4 text-left transition ${on?'border-pine bg-mosslight':'border-stonewarm bg-white'}"><span class="w-6 h-6 rounded-lg ${on?'bg-pine text-white':'bg-cream2'} flex items-center justify-center font-bold text-sm shrink-0">${on?'✓':''}</span><span class="flex-1"><b class="text-sm">${a.t}</b><br/><span class="text-xs text-muted">${a.d}</span></span><b class="text-sm">+${inr(a.p)}</b></button>`;}).join('')}</div>
+    <label class="label-eyebrow text-muted mt-6 block">Coupon code</label><div class="flex gap-2 mt-2"><input id="bkCoupon" value="${b.coupon}" placeholder="Try SUKH15 for 15% off" class="input flex-1 uppercase font-bold"/><button onclick="applyCoupon()" class="btn-outline px-6 font-bold text-sm">Apply</button></div>
+    <div class="flex gap-3 mt-7"><button onclick="bookingState.step=2;renderBooking()" class="btn-outline px-6 py-4 text-sm">← Back</button><button onclick="bookingState.step=4;renderBooking()" class="btn-primary flex-1 py-4 text-sm">Continue → Payment</button></div>`;
+  if(b.step===4)body=`
+    <h2 class="font-display text-2xl font-semibold">Payment</h2><p class="text-sm text-muted mt-1">Reserve with <b>${inr(5000)}</b> now — balance auto-reminds 15 days before.</p>
+    <div class="flex gap-2 mt-5 bg-cream2 rounded-full p-1">${['upi','card','later'].map(m=>`<button onclick="bookingState.payMethod='${m}';renderBooking()" class="flex-1 py-2.5 rounded-full text-sm font-bold transition ${b.payMethod===m?'bg-pine text-white':'text-muted'}">${m==='upi'?'UPI':m==='card'?'Card':'Pay later'}</button>`).join('')}</div>
+    <div class="mt-5">${b.payMethod==='upi'?`<div class="text-center bg-cream2 rounded-2xl p-6"><div class="w-40 h-40 mx-auto bg-white rounded-2xl border border-stonewarm flex items-center justify-center font-display text-4xl">◈</div><p class="text-xs font-bold text-muted mt-3">Scan with GPay / PhonePe / Paytm</p><input placeholder="or enter UPI id — name@okbank" class="input mt-3 text-center"/></div>`:b.payMethod==='card'?`<div class="space-y-3"><input placeholder="Card number  ····  ····  ····  4532" class="input"/><div class="grid grid-cols-2 gap-3"><input placeholder="MM / YY" class="input"/><input placeholder="CVV" type="password" class="input"/></div><input placeholder="Name on card" class="input"/></div>`:`<div class="bg-sandlight border border-sand rounded-2xl p-5 text-sm leading-relaxed"><b>Pay ₹0 today.</b> We’ll hold your seats for 48 hours while your designer finalises everything. No card needed.</div>`}</div>
+    <label class="flex items-start gap-3 mt-5 text-[13px] font-medium text-muted cursor-pointer"><input type="checkbox" id="bkAgree" ${b.agree?'checked':''} class="mt-1 accent-[#0E3B34] w-4 h-4"/> I agree to the fare rules, cancellation policy & sharing IDs for permits.</label>
+    <div class="flex gap-3 mt-6"><button onclick="bookingState.step=3;renderBooking()" class="btn-outline px-6 py-4 text-sm">← Back</button><button onclick="saveStep4()" class="btn-primary flex-1 py-4 text-sm">Review booking →</button></div>`;
+  if(b.step===5){const t2=t;body=`
+    <h2 class="font-display text-2xl font-semibold">One last look 👀</h2><p class="text-sm text-muted mt-1">Check everything — then we pop the celebratory filter coffee.</p>
+    <div class="bg-cream2 rounded-2xl p-5 mt-5 text-sm space-y-2 font-medium"><div class="flex justify-between"><span class="text-muted">Lead traveller</span><b>${b.name} · ${b.phone}</b></div><div class="flex justify-between"><span class="text-muted">Departure</span><b>${b.date} · ${b.slot}</b></div><div class="flex justify-between"><span class="text-muted">Party</span><b>${b.travellers} guests · ${b.rooms} room(s) · ${b.room}</b></div><div class="flex justify-between"><span class="text-muted">Paying via</span><b class="uppercase">${b.payMethod}</b></div><div class="flex justify-between text-base pt-2 border-t border-stonewarm"><span>Total</span><b class="text-pine">${inr(t2.total)}</b></div></div>
+    <div class="flex gap-3 mt-6"><button onclick="bookingState.step=4;renderBooking()" class="btn-outline px-6 py-4 text-sm">← Back</button><button onclick="confirmBooking()" class="btn-gold flex-1 py-4 text-sm">Pay ${inr(b.payMethod==='later'?0:5000)} & confirm 🎉</button></div>`;}
+  $('bookingStepBody').innerHTML=body;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function saveStep1(){const n=$('bkName').value.trim(),e=$('bkEmail').value.trim(),p=$('bkPhone').value.trim();if(!n||!e.includes('@')||p.length<8){toast('Please add a valid name, email & phone','error');return;}bookingState.name=n;bookingState.email=e;bookingState.phone=p;bookingState.notes=$('bkNotes').value;bookingState.step=2;renderBooking();}
+function saveStep2(){bookingState.date=$('bkDate').value;bookingState.slot=$('bkSlot').value;bookingState.step=3;renderBooking();}
+function bkTravCh(d){bookingState.travellers=Math.min(12,Math.max(1,bookingState.travellers+d));$('bkTravV').textContent=bookingState.travellers;renderBooking();}
+function bkRoomCh(d){bookingState.rooms=Math.min(6,Math.max(1,bookingState.rooms+d));renderBooking();}
+function toggleAddon(id){bookingState.addons.includes(id)?bookingState.addons=bookingState.addons.filter(x=>x!==id):bookingState.addons.push(id);renderBooking();}
+function applyCoupon(){const v=$('bkCoupon').value.trim().toUpperCase();if(v==='SUKH15'){bookingState.coupon=v;toast('Coupon applied — 15% off! You save '+inr(Math.round(bookingTotals().sub*.15)));}else{toast('Hmm, that code isn’t valid. Try SUKH15','error');return;}renderBooking();}
+function saveStep4(){if(!$('bkAgree').checked){toast('Please accept the fare rules to continue','error');return;}bookingState.agree=true;bookingState.step=5;renderBooking();}
+function confirmBooking(){
+  $('processingOverlay').classList.remove('hidden');
+  const msgs=['Reserving handpicked stay…','Assigning rested driver…','Blocking houseboat deck…','Sending tickets to WhatsApp…'];
+  let i=0;const iv=setInterval(()=>{i++;if(i<msgs.length)$('processingText').textContent=msgs[i];},900);
+  setTimeout(()=>{clearInterval(iv);$('processingOverlay').classList.add('hidden');finishBooking();},3400);
+}
+function finishBooking(){
+  const t=bookingTotals(),b=bookingState;
+  const id='SY-'+Math.floor(100000+Math.random()*899999);
+  myBookings.unshift({id,pkgId:b.pkg.id,title:b.pkg.title,image:b.pkg.image,date:b.date,trav:b.travellers+' guests',total:t.total,status:'Upcoming',loc:b.pkg.destName});
+  adminBookings.unshift({id,guest:b.name,phone:b.phone,trip:b.pkg.title,date:b.date,amt:t.total,status:'Pending'});
+  const addons=ADDONS.filter(a=>b.addons.includes(a.id));
+  $('confirmContent').innerHTML=`
+    <div class="text-center">
+      <div class="check-pop w-24 h-24 mx-auto rounded-full bg-pine text-white flex items-center justify-center text-4xl shadow-lift">✓</div>
+      <div class="badge bg-mosslight text-moss mt-6">● Booking ${id} · ${b.payMethod==='later'?'Seats held 48 hrs':'Token paid '+inr(5000)}</div>
+      <h1 class="font-display text-4xl lg:text-5xl font-semibold mt-4">Shubh yatra, ${b.name.split(' ')[0]}!<br/><span class="italic text-moss font-medium">You’re going to ${b.pkg.destName}.</span></h1>
+      <p class="text-muted mt-3 max-w-lg mx-auto text-[15px]">Tickets & hotel vouchers are on their way to <b>${b.email}</b> and WhatsApp <b>${b.phone}</b>. Meera, your designer, will call within 4 hours.</p>
+    </div>
+    <div class="bg-white rounded-[28px] border border-stonewarm shadow-card p-7 mt-8 grid md:grid-cols-[200px_1fr] gap-6">
+      <img src="${b.pkg.image}" class="w-full h-44 md:h-full object-cover rounded-2xl"/>
+      <div><h3 class="font-display text-2xl font-semibold">${b.pkg.title}</h3><div class="text-sm text-muted font-semibold mt-1">${b.pkg.nights}N/${b.pkg.days}D · Departure ${b.date} · ${b.travellers} guests · ${b.rooms} ${b.room} room(s)</div>
+      <div class="grid grid-cols-3 gap-3 mt-4 text-center">${[['Total paid',inr(b.payMethod==='later'?0:5000)],['Trip total',inr(t.total)],['Balance due',inr(t.total-(b.payMethod==='later'?0:5000))]].map(x=>`<div class="bg-cream2 rounded-2xl p-3"><div class="label-eyebrow text-muted">${x[0]}</div><div class="font-extrabold mt-1">${x[1]}</div></div>`).join('')}</div>
+      ${addons.length?`<div class="text-xs font-bold text-moss mt-3">+ ${addons.map(a=>a.t).join(' · ')}</div>`:''}
+      ${b.coupon?`<div class="text-xs font-bold text-clay mt-1">Coupon ${b.coupon} applied — you saved ${inr(t.disc)} 🎉</div>`:''}</div>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-4 mt-5">${[['1 · Today','Designer call + vouchers on WhatsApp'],['2 · 15 days before','Balance link + packing list + driver details'],['3 · Travel day','Pickup with placard, lounge & 24×7 concierge']].map(s=>`<div class="bg-pinedark text-white rounded-3xl p-5"><div class="label-eyebrow text-sand">${s[0]}</div><div class="text-sm font-semibold mt-2 leading-relaxed">${s[1]}</div></div>`).join('')}</div>
+    <div class="flex flex-col sm:flex-row gap-3 mt-7"><button onclick="navigate('trips')" class="btn-primary flex-1 py-4 text-sm">View in My Trips →</button><button onclick="navigate('explore')" class="btn-outline flex-1 py-4 text-sm font-bold">Plan another journey</button></div>`;
+  navigate('confirmation');
+}
+
+/* ==================== AUTH ==================== */
+function authTab(m){authMode=m;$('tabLogin').className='flex-1 py-2.5 rounded-full font-bold text-sm transition '+(m==='login'?'bg-pine text-white':'text-muted');$('tabSignup').className='flex-1 py-2.5 rounded-full font-bold text-sm transition '+(m==='signup'?'bg-pine text-white':'text-muted');$('signupNameWrap').classList.toggle('hidden',m==='login');$('authTitle').textContent=m==='login'?'Welcome back, yatri':'Your next story begins here';$('authSub').textContent=m==='login'?'Pick up right where your wanderlust left off.':'Join 1.2 lakh travellers · ₹1,500 off your first trip.';$('authBtn').textContent=m==='login'?'Log in →':'Create account →';$('authError').classList.add('hidden');}
+function togglePass(){const i=$('authPass');i.type=i.type==='password'?'text':'password';}
+function fillDemo(){$('authEmail').value='ananya@example.com';$('authPass').value='sukhyatri123';toast('Demo credentials filled — hit Log in','info');}
+function socialLogin(p){currentUser={name:'Ananya Sharma',email:'ananya@example.com'};afterLogin(`Signed in with ${p} — welcome back!`);}
+function submitAuth(){
+  const e=$('authEmail').value.trim(),pw=$('authPass').value;
+  const err=m=>{$('authError').textContent=m;$('authError').classList.remove('hidden');};
+  if(!e.includes('@'))return err('Please enter a valid email address.');
+  if(pw.length<6)return err('Password must be at least 6 characters.');
+  if(authMode==='login'&&!(e==='ananya@example.com'&&pw==='sukhyatri123'))return err('Hmm — those details don’t match. Try the demo login below.');
+  const name=authMode==='signup'?($('authName').value.trim()||'New Yatri'):'Ananya Sharma';
+  currentUser={name,email:e};afterLogin(authMode==='signup'?`Welcome to SukhYatri, ${name.split(' ')[0]}! ₹1,500 credit added 🎉`:`Welcome back, ${name.split(' ')[0]}! Great to see you.`);
+}
+function afterLogin(msg){renderAuthArea();toast(msg);navigate('trips');}
+function logout(){currentUser=null;renderAuthArea();navigate('home');toast('Logged out. Phir milenge, yatri!','info');}
+function renderAuthArea(){
+  const html=currentUser
+    ?`<button onclick="navigate('trips')" class="hidden sm:flex items-center gap-2 bg-white border border-stonewarm rounded-full pl-1 pr-4 py-1 hover:border-pine transition"><span class="w-8 h-8 rounded-full bg-pine text-white flex items-center justify-center font-bold text-sm">${currentUser.name[0]}</span><span class="text-sm font-bold">${currentUser.name.split(' ')[0]}</span></button><button onclick="navigate('booking' in window?'trips':'trips');navigate('trips')" class="btn-primary px-5 py-2.5 text-[13px] hidden sm:inline-flex" style="display:none"></button><button onclick="logout()" class="text-xs font-bold text-muted hover:text-clay">Logout</button><button onclick="navigate('explore')" class="btn-primary px-5 py-2.5 text-[13px]">Book now</button>`
+    :`<button onclick="navigate('auth')" class="font-bold text-sm text-pine hover:text-moss">Log in</button><button onclick="navigate('auth');authTab('signup')" class="btn-primary px-5 py-2.5 text-[13px]">Sign up free</button>`;
+  $('navAuthArea').innerHTML=html;
+  $('mobileAuthArea').innerHTML=currentUser?`<button onclick="navigate('trips')" class="btn-primary flex-1 py-3 text-sm">Hi, ${currentUser.name.split(' ')[0]} · My Trips</button>`:`<button onclick="navigate('auth')" class="btn-primary flex-1 py-3 text-sm">Log in / Sign up</button>`;
+}
+
+/* ==================== MY TRIPS ==================== */
+let tripsTab='Upcoming';
+function renderTrips(){
+  if(!currentUser){navigate('auth');toast('Log in to see your journeys','info');return;}
+  const up=myBookings.filter(b=>b.status==='Upcoming'),done=myBookings.filter(b=>b.status==='Completed'),wish=[...wishlist].map(pkgById).filter(Boolean);
+  const list=tripsTab==='Upcoming'?up:tripsTab==='Completed'?done:[];
+  $('tripsContent').innerHTML=`
+  <div class="bg-pinedark text-white rounded-[28px] p-7 lg:p-10 relative overflow-hidden grain">
+    <img src="${IMG.valley}" class="absolute inset-0 w-full h-full object-cover opacity-20" alt=""/><div class="relative flex flex-wrap items-center gap-5">
+    <div class="w-16 h-16 rounded-3xl bg-sand text-ink font-display font-bold text-2xl flex items-center justify-center">${currentUser.name[0]}</div>
+    <div><h1 class="font-display text-3xl font-semibold">Namaste, ${currentUser.name.split(' ')[0]} 🙏</h1><p class="text-white/60 text-sm">${currentUser.email} · <span class="text-sand font-bold">Gold Yatri</span> · 2,450 SukhCoins (₹2,450 off)</p></div>
+    <div class="ml-auto flex gap-6 text-center">${[[up.length,'Upcoming'],[done.length,'Completed'],[wish.length,'Wishlist']].map(s=>`<div><div class="font-display text-2xl">${s[0]}</div><div class="text-[11px] font-bold text-white/50 uppercase tracking-wider">${s[1]}</div></div>`).join('')}</div></div>
+  </div>
+  <div class="flex gap-6 mt-7 border-b border-stonewarm">${['Upcoming','Completed','Wishlist'].map(t=>`<button onclick="tripsTab='${t}';renderTrips()" class="tab-underline pb-3 font-bold text-sm ${tripsTab===t?'active text-pine':'text-muted'}">${t} ${t==='Wishlist'?`(${wish.length})`:''}</button>`).join('')}</div>
+  <div class="mt-6 space-y-4">${tripsTab==='Wishlist'
+    ?(wish.length?`<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">${wish.map(p=>packageCard(p)).join('')}</div>`:`<div class="text-center py-16 bg-white rounded-3xl border border-stonewarm"><div class="text-4xl">♡</div><p class="font-bold mt-3">No saved trips yet</p><button onclick="navigate('explore')" class="btn-primary px-6 py-3 text-sm mt-4">Discover journeys</button></div>`)
+    :(list.length?list.map(b=>`
+      <div class="bg-white rounded-[24px] border border-stonewarm p-5 flex flex-col md:flex-row gap-5 shadow-card card-hover">
+        <img src="${b.image}" class="w-full md:w-56 h-44 object-cover rounded-2xl"/>
+        <div class="flex-1"><div class="flex flex-wrap items-center gap-2"><span class="badge ${b.status==='Upcoming'?'status-confirmed':'bg-cream2 text-muted'}">● ${b.status}</span><span class="text-xs font-bold text-muted">${b.id} · ${b.loc}</span></div>
+        <h3 class="font-display text-[22px] font-semibold mt-2">${b.title}</h3>
+        <div class="text-sm text-muted font-semibold mt-1">📅 ${b.date} · 👥 ${b.trav} · <b class="text-ink">${inr(b.total)}</b></div>
+        ${b.status==='Upcoming'?'<div class="mt-3 h-2 bg-cream2 rounded-full overflow-hidden max-w-md"><div class="h-full w-[35%] bg-gradient-to-r from-moss to-pine rounded-full"></div></div><div class="text-[11px] font-bold text-moss mt-1">35 days to go · Designer call scheduled · Vouchers ready</div>':'<div class="text-[12px] font-bold text-sand mt-2">★★★★★ You rated this trip 5/5 — dhanyavaad!</div>'}
+        </div>
+        <div class="flex md:flex-col gap-2 justify-center shrink-0">${b.status==='Upcoming'?`<button onclick="toast('Itinerary PDF sent to ${currentUser.email}','success')" class="btn-primary px-5 py-2.5 text-xs whitespace-nowrap">Download vouchers</button><button onclick="openConcierge()" class="btn-outline px-5 py-2.5 text-xs font-bold whitespace-nowrap">Chat concierge</button><button onclick="cancelTrip('${b.id}')" class="text-xs font-bold text-[#B42318] py-1">Cancel trip</button>`:`<button onclick="navigate('explore')" class="btn-primary px-5 py-2.5 text-xs whitespace-nowrap">Book again</button><button onclick="toast('Invoice sent to email','success')" class="btn-outline px-5 py-2.5 text-xs font-bold">Invoice</button>`}</div>
+      </div>`).join('')
+    :`<div class="text-center py-16 bg-white rounded-3xl border border-stonewarm"><div class="text-4xl">🧳</div><p class="font-bold mt-3">Nothing here yet</p><button onclick="navigate('explore')" class="btn-primary px-6 py-3 text-sm mt-4">Find your journey</button></div>`)}</div>
+  <div class="mt-8 bg-sandlight border border-sand/40 rounded-[24px] p-6 flex flex-col md:flex-row items-center gap-4"><div><h4 class="font-display text-xl font-semibold">Refer & earn ₹2,000 per friend</h4><p class="text-sm text-[#8A6A2F]">They get ₹1,500 off. You get SukhCoins. Everyone arrives in joy.</p></div><div class="md:ml-auto flex gap-2 w-full md:w-auto"><input value="sukhyatri.in/r/ANANYA24" readonly class="input !bg-white flex-1 md:w-56 text-sm font-bold"/><button onclick="copyCode('sukhyatri.in/r/ANANYA24')" class="btn-primary px-5 py-3 text-sm shrink-0">Copy</button></div></div>`;
+}
+function cancelTrip(id){const b=myBookings.find(x=>x.id===id);if(b){b.status='Cancelled';myBookings=myBookings.filter(x=>x.id!==id);toast(`Trip ${id} cancelled — refund initiated (3–5 days)`,'info');renderTrips();}}
+
+/* ==================== CONTACT / MISC ==================== */
+function submitContact(){
+  const f=$('cFirst').value.trim(),e=$('cEmail').value.trim(),m=$('cMsg').value.trim();
+  if(!f||!e.includes('@')||m.length<10){$('contactErr').textContent='Please add your name, a valid email and a message (10+ characters).';$('contactErr').classList.remove('hidden');return;}
+  $('contactErr').classList.add('hidden');
+  toast(`Dhanyavaad, ${f}! Our team replies within 2 hours (9am–9pm IST)`);
+  $('cFirst').value='';$('cEmail').value='';$('cMsg').value='';$('cPhone').value='';$('cLast').value='';
+}
+function subscribeNews(){const v=$('newsEmail').value.trim();if(!v.includes('@')){toast('Please enter a valid email','error');return;}$('newsEmail').value='';toast('Welcome aboard! ₹1,500 code sent to <b>'+v+'</b>');}
+
+/* ==================== ADMIN ==================== */
+function renderAdminAll(){
+  $('adminKpis').innerHTML=[['Total revenue (Oct)','₹48.2L','▲ 18% vs Sep','#147A70'],['Active bookings','312','▲ 24 this week','#147A70'],['Avg. rating','4.9 / 5','8,214 reviews','#C8A96A'],['Cancellation rate','2.1%','▼ Best ever','#0E3B34']].map(k=>`<div class="bg-white rounded-3xl border border-[#DFE5E2] p-5"><div class="text-xs font-bold text-muted uppercase tracking-wider">${k[0]}</div><div class="font-display text-3xl mt-1">${k[1]}</div><div class="text-xs font-bold mt-1" style="color:${k[3]}">${k[2]}</div></div>`).join('');
+  $('adminRecentBody').innerHTML=adminBookings.slice(0,5).map(b=>`<tr class="border-b border-[#F0F3F2] hover:bg-[#F8FAF9]"><td class="px-6 py-3.5"><b>${b.guest}</b><br/><span class="text-xs text-muted">${b.id}</span></td><td class="px-4 py-3.5 text-[13px] font-semibold">${b.trip}</td><td class="px-4 py-3.5 text-[13px]">${b.date}</td><td class="px-4 py-3.5 font-bold">${inr(b.amt)}</td><td class="px-4 py-3.5"><span class="badge status-${b.status.toLowerCase()}">${b.status}</span></td></tr>`).join('');
+  $('adminTasks').innerHTML=[['2 VIP honeymoon arrivals today','Assign senior driver — Goa & Udaipur'],['Payment pending: Emily Carter','₹1,12,800 · nudge via WhatsApp'],['Ladakh oxygen audit due','Winter stock check before Nov']].map(t=>`<div class="bg-white/5 border border-white/10 rounded-2xl p-3.5"><b class="text-[13px]">${t[0]}</b><div class="text-xs text-white/55 mt-0.5">${t[1]}</div></div>`).join('');
+  $('occupancyBars').innerHTML=[['Kerala houseboats',92],['Ladakh camps',78],['Rajasthan havelis',85],['Andaman resorts',64]].map(o=>`<div><div class="flex justify-between mb-1"><span>${o[0]}</span><span>${o[1]}%</span></div><div class="h-2 bg-[#EEF1EF] rounded-full"><div class="h-full bg-[#147A70] rounded-full" style="width:${o[1]}%"></div></div></div>`).join('');
+  $('donutLegend').innerHTML=[['Kerala','#0E3B34','34%'],['Rajasthan','#147A70','26%'],['Ladakh','#C8A96A','18%'],['Andaman','#C86B4A','12%'],['Others','#D9D1C0','10%']].map(l=>`<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full" style="background:${l[1]}"></span>${l[0]}<span class="ml-auto">${l[2]}</span></div>`).join('');
+  renderAdminBookings();renderAdminPackages();renderAdminCustomers();
+}
+function renderAdminBookings(){
+  const s=$('adminStatusFilter').value,q=($('adminBookSearch').value||'').toLowerCase();
+  const list=adminBookings.filter(b=>(!s||b.status===s)&&(!q||(b.guest+b.id+b.trip).toLowerCase().includes(q)));
+  $('adminBookCount').textContent=list.length+' bookings';
+  $('adminBookBody').innerHTML=list.map((b,i)=>`<tr class="border-b border-[#F0F3F2] hover:bg-[#F8FAF9]"><td class="px-6 py-4 font-bold">${b.id}</td><td class="px-4 py-4"><b>${b.guest}</b><br/><span class="text-xs text-muted">${b.phone}</span></td><td class="px-4 py-4 text-[13px] font-semibold">${b.trip}</td><td class="px-4 py-4 text-[13px]">${b.date}</td><td class="px-4 py-4 font-bold">${inr(b.amt)}</td><td class="px-4 py-4"><span class="badge status-${b.status.toLowerCase()}">${b.status}</span></td><td class="px-4 py-4"><div class="flex gap-1.5">${b.status==='Pending'?`<button onclick="setBookStatus(${adminBookings.indexOf(b)},'Confirmed')" class="text-[11px] font-bold bg-[#E6F1EE] text-[#147A70] rounded-full px-3 py-1.5">Confirm</button>`:''}<button onclick="setBookStatus(${adminBookings.indexOf(b)},'Cancelled')" class="text-[11px] font-bold bg-[#FDECEC] text-[#B42318] rounded-full px-3 py-1.5">Cancel</button></div></td></tr>`).join('')||'<tr><td colspan="7" class="text-center py-10 text-muted font-semibold">No bookings match.</td></tr>';
+}
+function setBookStatus(i,st){adminBookings[i].status=st;renderAdminBookings();renderAdminAll();toast(`Booking ${adminBookings[i].id} → <b>${st}</b>`,st==='Cancelled'?'error':'success');}
+function renderAdminPackages(){
+  $('adminPackGrid').innerHTML=PACKAGES.slice(0,6).map(p=>`<div class="bg-white rounded-3xl border border-[#DFE5E2] overflow-hidden"><img src="${p.image}" class="h-36 w-full object-cover"/><div class="p-5"><div class="flex items-center justify-between"><b class="text-[15px]">${p.title}</b><span class="badge bg-[#E6F1EE] text-[#147A70]">Live</span></div><div class="text-xs text-muted font-semibold mt-1">${p.nights}N/${p.days}D · ${inr(p.price)} · ★ ${p.rating} (${p.reviewsCount})</div><div class="h-2 bg-[#EEF1EF] rounded-full mt-3"><div class="h-full bg-[#C8A96A] rounded-full" style="width:${40+Math.floor(Math.random()*50)}%"></div></div><div class="flex gap-2 mt-4"><button onclick="toast('Opening package editor…','info')" class="flex-1 py-2.5 rounded-xl bg-[#0B1A17] text-white text-xs font-bold">Edit</button><button onclick="toast('Dates duplicated for Nov','success')" class="flex-1 py-2.5 rounded-xl border border-[#DFE5E2] text-xs font-bold">Duplicate</button></div></div></div>`).join('');
+}
+function renderAdminCustomers(){
+  $('adminCustStats').innerHTML=[['Total guests','1.2L','+2,310 this month'],['Repeat rate','38%','Industry: 12%'],['Gold Yatris','4,820','Top tier']].map(s=>`<div class="bg-white rounded-3xl border border-[#DFE5E2] p-5"><div class="text-xs font-bold text-muted uppercase">${s[0]}</div><div class="font-display text-3xl mt-1">${s[1]}</div><div class="text-xs font-bold text-[#147A70] mt-1">${s[2]}</div></div>`).join('');
+  $('adminCustBody').innerHTML=[['Ananya Sharma','ananya@example.com',6,342000,'Gold','2 hrs ago'],['Rohan Mehta','rohan@gmail.com',3,158700,'Gold','1 day ago'],['Emily Carter','emily@ukmail.co',2,225600,'Silver','3 days ago'],['Vikram Reddy','vikram@outlook.com',4,198000,'Gold','5 days ago'],['Farah Khan','farah@yahoo.in',1,21500,'Bronze','1 wk ago']].map(c=>`<tr class="border-b border-[#F0F3F2]"><td class="px-6 py-4"><div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full bg-[#0E3B34] text-white flex items-center justify-center font-bold text-sm">${c[0][0]}</span><span><b>${c[0]}</b><br/><span class="text-xs text-muted">${c[1]}</span></span></div></td><td class="px-4 py-4 font-bold">${c[2]}</td><td class="px-4 py-4 font-bold">${inr(c[3])}</td><td class="px-4 py-4"><span class="badge ${c[4]==='Gold'?'bg-[#F2E8D5] text-[#8A6A2F]':c[4]==='Silver'?'bg-[#EEF1EF] text-[#3A4542]':'bg-[#FFF4DE] text-[#9A7410]'}">${c[4]}</span></td><td class="px-4 py-4 text-xs font-semibold text-muted">${c[5]}</td></tr>`).join('');
+}
+let chartsInit=false;
+function initAdminCharts(){
+  if(chartsInit||typeof Chart==='undefined')return;chartsInit=true;
+  new Chart($('revChart'),{type:'line',data:{labels:['Aug W1','Aug W3','Sep W1','Sep W3','Oct W1','Oct W2','Oct W3','Now'],datasets:[{data:[22,28,31,38,42,45,47,48],borderColor:'#0E3B34',backgroundColor:'rgba(20,122,112,.12)',fill:true,tension:.45,pointBackgroundColor:'#C8A96A',pointRadius:4,borderWidth:3}]},options:{plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>'₹'+v+'L'}},x:{grid:{display:false}}},maintainAspectRatio:false}});
+  new Chart($('donutChart'),{type:'doughnut',data:{labels:['Kerala','Rajasthan','Ladakh','Andaman','Others'],datasets:[{data:[34,26,18,12,10],backgroundColor:['#0E3B34','#147A70','#C8A96A','#C86B4A','#D9D1C0'],borderWidth:3,borderColor:'#fff'}]},options:{cutout:'62%',plugins:{legend:{display:false}},maintainAspectRatio:false}});
+}
+function openPackageModal(){$('pkgModal').classList.remove('hidden');}
+
+/* ==================== REVEAL / INIT ==================== */
+let observer;
+function observeReveals(){
+  if(!observer)observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>observer.observe(el));
+}
+function initNavDropdowns(){
+  $('navDestDropdown').innerHTML=DESTINATIONS.map(d=>`<button onclick="navigate('destination','${d.id}')" class="flex items-center gap-3 p-2.5 rounded-2xl hover:bg-cream text-left transition"><img src="${d.image}" class="w-14 h-14 rounded-xl object-cover"/><span><b class="text-sm block">${d.name}</b><span class="text-xs text-muted">from ${inr(d.priceFrom)} · ★ ${d.rating}</span></span></button>`).join('');
+  $('mobileDestList').innerHTML=DESTINATIONS.map(d=>`<button onclick="navigate('destination','${d.id}')" class="chip !text-xs">${d.name}</button>`).join('');
+  $('heroDest').innerHTML='<option value="">Anywhere in India</option>'+DESTINATIONS.map(d=>`<option value="${d.name.split(' ')[0]}">${d.name} — from ${inr(d.priceFrom)}</option>`).join('');
+}
+function initStatic(){
+  $('milestoneGrid').innerHTML=[['2019','The first Sumo','Six strangers, Spiti, one unforgettable breakdown-turned-bonfire. SukhYatri is born in Kochi.'],['2021','10,000 yatris','Survived the pause by hosting slow, local Kerala bubbles. Rated 4.9 for safety.'],['2023','48 routes live','Ladakh, Andaman & Rajasthan studios open. 24×7 concierge launched.'],['2026','1.2 lakh strong','38% travel again. Zero hidden charges. Still obsessed with soft beds.']].map(m=>`<div class="bg-white border border-stonewarm rounded-3xl p-6 card-hover"><div class="font-display text-3xl text-moss">${m[0]}</div><h4 class="font-extrabold mt-2">${m[1]}</h4><p class="text-sm text-muted mt-2 leading-relaxed">${m[2]}</p></div>`).join('');
+  $('valuesGrid').innerHTML=[['Comfort without guilt','Premium beds, honest prices. Luxury that doesn’t need a second mortgage.'],['Hosts, not vendors','120+ local partners paid fairly & on time. Your money stays in the hills.'],['Slow over checklist','Fewer sights, deeper moments. We’ll never rush your chai for a viewpoint.']].map(v=>`<div class="bg-white border border-stonewarm rounded-3xl p-7 text-center card-hover"><div class="w-12 h-12 mx-auto rounded-2xl bg-sandlight text-pine font-display text-xl flex items-center justify-center">✦</div><h4 class="font-extrabold mt-4">${v[0]}</h4><p class="text-sm text-muted mt-2">${v[1]}</p></div>`).join('');
+  $('contactFaq').innerHTML=[['Can I customise any trip?','Yes — 83% of trips are tweaked. Dates, hotels, pace, food. Free.'],['Do you offer EMI?','Yes, 0% EMI on cards + UPI Autopay for balances.'],['Is my payment safe?','100%. Escrow-held, IATA-accredited, GST invoice always.']].map(f=>`<div class="bg-cream2 rounded-xl p-3.5"><b class="text-[13px]">${f[0]}</b><p class="text-xs text-muted mt-1">${f[1]}</p></div>`).join('');
+  $('contactTopics').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{$('contactTopics').querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');});
+}
+window.addEventListener('load',()=>{
+  renderAuthArea();initNavDropdowns();renderHome();renderFilterChips();applyExploreFilters();initStatic();observeReveals();
+  setInterval(()=>{if(currentPage==='home'){const pages=Math.ceil(TESTIMONIALS.length/3);testiPage=(testiPage+1)%pages;if($('testiGrid'))renderTestis();}},7000);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeGallery();closeConcierge();}});
+});
+</script>
+</body>
+</html>
