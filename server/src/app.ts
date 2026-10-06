@@ -4,15 +4,27 @@ import cors from 'cors';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
 import { ENV } from './config/env.js';
+import { connectDatabase } from './config/database.js';
 import { apiRoutes } from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { apiRateLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
+// Ensure DB connection for serverless / containerized environments
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDatabase();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Security Headers (MIME sniffing protection, Referrer Policy, HSTS, Frame protection)
+const helmetMiddleware = ((helmet as any)?.default || helmet) as (options?: any) => express.RequestHandler;
 app.use(
-  helmet({
+  helmetMiddleware({
     crossOriginResourcePolicy: { policy: 'cross-origin' },
     contentSecurityPolicy: false, // Ensures Razorpay Checkout SDK & CDN images load cleanly
     referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
