@@ -1,5 +1,7 @@
 import rateLimit from 'express-rate-limit';
 
+const createRateLimiter = ((rateLimit as any)?.default || rateLimit) as typeof rateLimit;
+
 const isQABypass = (req: any): boolean => {
   if (process.env.NODE_ENV === 'production') {
     return false; // STRICTLY DISABLED IN PRODUCTION — All clients must abide by rate limits
@@ -13,7 +15,7 @@ const isQABypass = (req: any): boolean => {
 /**
  * Strict limiter for authentication & security-sensitive endpoints (login, register, OTP verification)
  */
-export const authRateLimiter = rateLimit({
+export const authRateLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 25, // Limit each IP to 25 requests per window to mitigate brute-force
   standardHeaders: true,
@@ -29,7 +31,7 @@ export const authRateLimiter = rateLimit({
 /**
  * Dedicated limiter for payment checkout creation & verification
  */
-export const paymentRateLimiter = rateLimit({
+export const paymentRateLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 100,
   standardHeaders: true,
@@ -45,7 +47,7 @@ export const paymentRateLimiter = rateLimit({
 /**
  * Coupon validation limiter (prevents code brute-forcing / dictionary attacks)
  */
-export const couponRateLimiter = rateLimit({
+export const couponRateLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 50,
   standardHeaders: true,
@@ -61,7 +63,7 @@ export const couponRateLimiter = rateLimit({
 /**
  * Global generous limiter for standard website browsing
  */
-export const apiRateLimiter = rateLimit({
+export const apiRateLimiter = createRateLimiter({
   windowMs: 15 * 60 * 1000,
   max: 1000,
   standardHeaders: true,
