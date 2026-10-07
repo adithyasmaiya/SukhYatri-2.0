@@ -5,6 +5,10 @@ let isConnected = false;
 let memoryServerInstance: any = null;
 
 export async function connectDatabase(): Promise<void> {
+  if (mongoose.connection.readyState === 1) {
+    isConnected = true;
+    return;
+  }
   if (isConnected) return;
 
   const mongoUri = ENV.MONGODB_URI;
@@ -12,7 +16,7 @@ export async function connectDatabase(): Promise<void> {
   try {
     // Attempt connecting to the configured MongoDB URI
     await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 2500,
+      serverSelectionTimeoutMS: 5000,
     });
     isConnected = true;
     const sanitizedUri = mongoUri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@');

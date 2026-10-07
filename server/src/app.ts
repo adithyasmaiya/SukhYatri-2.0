@@ -11,6 +11,18 @@ import { apiRateLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
+// Auto-connect to database on cold starts (bypassed instantly once connected)
+app.use(async (_req, _res, next) => {
+  if (mongoose.connection.readyState !== 1) {
+    try {
+      await connectDatabase();
+    } catch (err: any) {
+      console.warn('[App] Database connection initialization warning:', err.message);
+    }
+  }
+  next();
+});
+
 // Security Headers (MIME sniffing protection, Referrer Policy, HSTS, Frame protection)
 const helmetMiddleware = ((helmet as any)?.default || helmet) as (options?: any) => express.RequestHandler;
 app.use(
