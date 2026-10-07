@@ -12,7 +12,11 @@ const handler = async (req: any, res: any) => {
         isConnecting = null;
       });
     }
-    await isConnecting;
+    try {
+      await isConnecting;
+    } catch (err: any) {
+      console.error('[Serverless Handler] Database auto-connect failed:', err?.message || err);
+    }
   }
   return app(req, res);
 };
