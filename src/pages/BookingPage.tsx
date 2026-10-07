@@ -55,7 +55,7 @@ export const BookingPage: React.FC = () => {
   const { tripId } = useParams<{ tripId: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, isAuthenticated } = useAuth();
   const { toast } = useToast();
 
   const [trip, setTrip] = useState<TripPackage | null>(null);
@@ -518,6 +518,12 @@ export const BookingPage: React.FC = () => {
 
   // Real Razorpay Payment Checkout & Verification Flow
   const handleProceedPayment = async () => {
+    if (!isAuthenticated || !currentUser) {
+      toast('Please sign in to proceed with payment and secure your booking.', 'info');
+      navigate(`/login?redirect=${encodeURIComponent(`/booking/${trip?.id || tripId}`)}`);
+      return;
+    }
+
     setIsProcessing(true);
     setPaymentFailure(null);
     setPaymentPending(false);
@@ -601,11 +607,16 @@ export const BookingPage: React.FC = () => {
     } catch (err: any) {
       setIsProcessing(false);
       console.error('[BookingPage] Payment initialization error:', err);
+      const isGatewayOrAdblock =
+        err.message?.toLowerCase().includes('gateway') ||
+        err.message?.toLowerCase().includes('connect') ||
+        err.message?.toLowerCase().includes('reach');
+
       setPaymentFailure({
-        title: "Payment wasn't completed",
-        message: err.message
-          ? `${err.message}. Your booking has not been charged.`
-          : 'Your booking has not been charged.',
+        title: isGatewayOrAdblock ? 'Payment Gateway Unreachable' : "Payment wasn't completed",
+        message: isGatewayOrAdblock
+          ? `${err.message}. If you have an AdBlocker or Brave Shields active, please disable it for SukhYatri and retry.`
+          : `${err.message || 'Payment could not be initialized'}. Your booking has not been charged.`,
         code: err.code || 'INIT_ERROR',
       });
     }

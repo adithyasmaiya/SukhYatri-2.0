@@ -11,16 +11,6 @@ import { apiRateLimiter } from './middleware/rateLimiter.js';
 
 const app = express();
 
-// Ensure DB connection for serverless / containerized environments
-app.use(async (_req, _res, next) => {
-  try {
-    await connectDatabase();
-    next();
-  } catch (err) {
-    next(err);
-  }
-});
-
 // Security Headers (MIME sniffing protection, Referrer Policy, HSTS, Frame protection)
 const helmetMiddleware = ((helmet as any)?.default || helmet) as (options?: any) => express.RequestHandler;
 app.use(

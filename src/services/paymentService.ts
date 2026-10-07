@@ -124,7 +124,10 @@ export const paymentService = {
       throw new Error('Could not connect to payment gateway. Please check your internet connection and try again.');
     }
 
-    const keyId = order.keyId || (import.meta as any).env?.VITE_RAZORPAY_KEY_ID || 'rzp_test_sukhyatri_dev123';
+    const keyId =
+      order.keyId ||
+      (import.meta as any).env?.VITE_RAZORPAY_KEY_ID ||
+      'rzp_test_SaHKqVeOgGtDOY';
 
     // Format phone number to clean 10-digit if present
     const cleanPhone = customer.phone ? customer.phone.replace(/[^0-9]/g, '').slice(-10) : '';
