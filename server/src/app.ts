@@ -105,6 +105,17 @@ const handleHealthCheck = (_req: Request, res: Response) => {
 app.get('/health', handleHealthCheck);
 app.get('/api/health', handleHealthCheck);
 
+// Root API Endpoint
+app.get('/', (_req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'operational',
+    service: 'SukhYatri 2.0 API Server',
+    version: '2.0.0',
+    documentation: '/api/docs',
+    health: '/health',
+  });
+});
+
 // API Routes
 app.use('/api', apiRoutes);
 
