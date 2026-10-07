@@ -1,6 +1,7 @@
 import rateLimit from 'express-rate-limit';
+import { RequestHandler } from 'express';
 
-const createRateLimiter = ((rateLimit as any)?.default || rateLimit) as typeof rateLimit;
+const createRateLimiter = (((rateLimit as any)?.default || rateLimit) as unknown) as (options?: any) => RequestHandler;
 
 const isQABypass = (req: any): boolean => {
   if (process.env.NODE_ENV === 'production') {
