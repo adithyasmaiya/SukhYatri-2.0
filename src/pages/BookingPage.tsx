@@ -607,6 +607,18 @@ export const BookingPage: React.FC = () => {
     } catch (err: any) {
       setIsProcessing(false);
       console.error('[BookingPage] Payment initialization error:', err);
+
+      if (
+        err.statusCode === 401 ||
+        err.code === 'UNAUTHORIZED' ||
+        err.message?.toLowerCase().includes('authentication') ||
+        err.message?.toLowerCase().includes('token')
+      ) {
+        toast('Please sign in to your account to complete your booking.', 'info');
+        navigate(`/login?redirect=${encodeURIComponent(`/booking/${trip?.id || tripId}`)}`);
+        return;
+      }
+
       const isGatewayOrAdblock =
         err.message?.toLowerCase().includes('gateway') ||
         err.message?.toLowerCase().includes('connect') ||

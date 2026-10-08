@@ -134,6 +134,15 @@ export const tripController = {
         trip = await Trip.findById(clean);
       }
 
+      // Fallback for package IDs (e.g. p1, p5, etc.)
+      if (!trip && /^p\d+$/i.test(clean)) {
+        const index = parseInt(clean.substring(1), 10) - 1;
+        const allTrips = await Trip.find({ isPublished: true }).sort({ createdAt: 1 });
+        if (allTrips[index]) {
+          trip = allTrips[index];
+        }
+      }
+
       if (!trip) {
         sendError(res, 'Trip not found', 404, 'TRIP_NOT_FOUND');
         return;

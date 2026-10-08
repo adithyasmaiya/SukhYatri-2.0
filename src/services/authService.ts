@@ -208,7 +208,15 @@ export const authService: IAuthService = {
 
   getCurrentUser(): User | null {
     try {
+      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
       const raw = localStorage.getItem(STORAGE_KEY_SESSION);
+
+      // In production API mode, a session without a token is stale/unauthenticated
+      if (raw && !token) {
+        localStorage.removeItem(STORAGE_KEY_SESSION);
+        return null;
+      }
+
       if (raw) return JSON.parse(raw);
     } catch {
       // Ignore
@@ -217,7 +225,7 @@ export const authService: IAuthService = {
   },
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem(TOKEN_STORAGE_KEY) || !!this.getCurrentUser();
+    return !!localStorage.getItem(TOKEN_STORAGE_KEY);
   },
 
   getPendingVerificationEmail(): string | null {
