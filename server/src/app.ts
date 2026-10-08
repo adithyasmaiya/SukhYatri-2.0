@@ -34,39 +34,40 @@ app.use(
 );
 
 // Cross-Origin Resource Sharing
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // In production, match configured origins, vercel preview domains, or requests with no origin (webhooks/same-origin)
-      if (ENV.NODE_ENV === 'production') {
-        const allowedOrigins = [ENV.FRONTEND_URL, ENV.CORS_ORIGIN].filter(Boolean);
-        if (
-          !origin ||
-          allowedOrigins.includes(origin) ||
-          origin.endsWith('.vercel.app')
-        ) {
-          callback(null, true);
-        } else {
-          callback(new Error('Blocked by CORS policy'));
-        }
-      } else {
-        // Development / Test: allow localhost origins or requests with no origin (curl/mobile/tools)
-        if (
-          !origin ||
-          origin === ENV.CORS_ORIGIN ||
-          origin === ENV.FRONTEND_URL ||
-          origin.startsWith('http://localhost:') ||
-          origin.startsWith('http://127.0.0.1:')
-        ) {
-          callback(null, true);
-        } else {
-          callback(new Error('Blocked by CORS policy'));
-        }
-      }
-    },
-    credentials: true,
-  })
-);
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. mobile apps, server-to-server webhooks, curl)
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const allowedOrigins = [
+      ENV.FRONTEND_URL,
+      ENV.CORS_ORIGIN,
+      'https://sukhyatrii.vercel.app',
+    ].filter(Boolean);
+
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      origin.startsWith('http://localhost:') ||
+      origin.startsWith('http://127.0.0.1:');
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      console.warn(`[CORS] Rejected origin: ${origin}`);
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Body Parsing (Capturing rawBody for Razorpay webhook HMAC verification)
 app.use(
