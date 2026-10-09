@@ -31,7 +31,7 @@ export const InclusionList: React.FC<InclusionListProps> = ({
             </h3>
           </div>
           <ul className="space-y-3 text-xs sm:text-sm font-semibold text-pine/90">
-            {inclusions.map((item, i) => (
+            {(inclusions || []).map((item, i) => (
               <li key={i} className="flex items-start gap-2.5">
                 <span className="text-moss font-bold text-sm shrink-0">✓</span>
                 <span className="leading-snug">{item}</span>
@@ -49,7 +49,7 @@ export const InclusionList: React.FC<InclusionListProps> = ({
             </h3>
           </div>
           <ul className="space-y-3 text-xs sm:text-sm font-semibold text-[#7D3411]/90">
-            {exclusions.map((item, i) => (
+            {(exclusions || []).map((item, i) => (
               <li key={i} className="flex items-start gap-2.5">
                 <span className="text-[#A34E24] font-bold text-sm shrink-0">×</span>
                 <span className="leading-snug">{item}</span>

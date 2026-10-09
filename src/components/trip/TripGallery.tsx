@@ -16,7 +16,11 @@ export const TripGallery: React.FC<TripGalleryProps> = ({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const allImages = [primaryImage, ...galleryImages.filter((img) => img !== primaryImage)];
+  const fallbackImg =
+    primaryImage ||
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop';
+  const galleryList = Array.isArray(galleryImages) ? galleryImages : [];
+  const allImages = [fallbackImg, ...galleryList.filter((img) => img && img !== fallbackImg)];
 
   const handleOpenPhoto = (idx: number) => {
     setCurrentIndex(idx);

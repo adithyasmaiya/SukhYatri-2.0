@@ -22,10 +22,14 @@ export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
   const origPrice = trip.originalPrice || trip.mrp || trip.price;
   const discountPercent =
     trip.discount !== undefined ? trip.discount : calculateDiscount(trip.price, origPrice);
-  const destinationText = trip.destination || trip.destName;
+  const cardImage =
+    trip.image ||
+    (trip as any).images?.[0] ||
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop';
+  const destinationText = trip.destination || trip.destName || (trip as any).destinationName || 'India';
   const shortDesc = trip.shortDescription || trip.desc;
-  const durationText = trip.duration || `${trip.nights}N / ${trip.days}D`;
-  const reviewCountNum = trip.reviewCount || trip.reviewsCount;
+  const durationText = trip.duration || `${trip.nights || 5}N / ${trip.days || 6}D`;
+  const reviewCountNum = trip.reviewCount || trip.reviewsCount || 48;
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -50,7 +54,7 @@ export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
       {/* Image Banner */}
       <div className="relative h-[220px] overflow-hidden">
         <img
-          src={trip.image}
+          src={cardImage}
           alt={trip.title}
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

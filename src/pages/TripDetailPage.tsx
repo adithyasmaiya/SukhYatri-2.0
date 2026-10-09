@@ -56,12 +56,19 @@ export const TripDetailPage: React.FC = () => {
       Promise.all([
         apiService.getPackageBySlug(slug),
         apiService.getPackages(),
-      ]).then(([pkg, packages]) => {
-        if (!mounted) return;
-        setTrip(pkg || null);
-        setAllTrips(packages || []);
-        setLoading(false);
-      });
+      ])
+        .then(([pkg, packages]) => {
+          if (!mounted) return;
+          setTrip(pkg || null);
+          setAllTrips(packages || []);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error('[TripDetailPage] Failed to load journey:', err);
+          if (!mounted) return;
+          setTrip(null);
+          setLoading(false);
+        });
     }
 
     return () => {

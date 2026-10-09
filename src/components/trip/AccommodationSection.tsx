@@ -12,21 +12,29 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({
   accommodation,
   destinationName = 'Destination',
 }) => {
+  const defaultAmenities = [
+    'Daily Artisanal Breakfast',
+    'Free High-Speed Wi-Fi',
+    'Scenic Balcony & Garden View',
+    '24×7 Concierge Desk',
+    'Ayurvedic Wellness Spa',
+    'Eco-Certified Sustainable Stay',
+  ];
+
   // Curated fallback if specific package doesn't have an explicit accommodation object
-  const data: TripAccommodation = accommodation || {
-    name: `${destinationName} Heritage Boutique Retreat`,
+  const data: TripAccommodation = {
+    name: accommodation?.name || `${destinationName} Heritage Boutique Retreat`,
     image:
+      accommodation?.image ||
       'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1200&auto=format&fit=crop',
-    category: '4★+ Handpicked Boutique / Heritage Stay',
-    amenities: [
-      'Daily Artisanal Breakfast',
-      'Free High-Speed Wi-Fi',
-      'Scenic Balcony & Garden View',
-      '24×7 Concierge Desk',
-      'Ayurvedic Wellness Spa',
-      'Eco-Certified Sustainable Stay',
-    ],
-    shortDescription: `Handpicked boutique property tested by SukhYatri travel editors. Enjoy calm ambient spaces, serene green surroundings, spotless hygiene standards, and heartfelt local hospitality.`,
+    category: accommodation?.category || '4★+ Handpicked Boutique / Heritage Stay',
+    amenities:
+      Array.isArray(accommodation?.amenities) && accommodation.amenities.length > 0
+        ? accommodation.amenities
+        : defaultAmenities,
+    shortDescription:
+      accommodation?.shortDescription ||
+      `Handpicked boutique property tested by SukhYatri travel editors. Enjoy calm ambient spaces, serene green surroundings, spotless hygiene standards, and heartfelt local hospitality.`,
   };
 
   return (

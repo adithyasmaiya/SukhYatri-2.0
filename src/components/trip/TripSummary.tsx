@@ -60,7 +60,7 @@ export const TripSummary: React.FC<TripSummaryProps> = ({ trip }) => {
         </div>
 
         <div className="space-y-3">
-          {trip.highlights.map((h, i) => (
+          {(trip.highlights || []).map((h, i) => (
             <div
               key={i}
               className="flex items-start gap-3.5 bg-white border border-stonewarm rounded-2xl p-4 shadow-sm"

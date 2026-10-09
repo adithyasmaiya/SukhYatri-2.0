@@ -25,6 +25,78 @@ export interface PackageFilters {
 
 export type ExploreFilterOptions = PackageFilters;
 
+export function normalizeTripPackage(data: any): TripPackage {
+  if (!data) return data;
+  const images = Array.isArray(data.images) && data.images.length > 0 ? data.images : [];
+  const primaryImage =
+    data.image ||
+    images[0] ||
+    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop';
+  const gallery =
+    Array.isArray(data.gallery) && data.gallery.length > 0
+      ? data.gallery
+      : images.length > 0
+        ? images
+        : [primaryImage];
+  const destName = data.destination || data.destName || data.destinationName || 'India';
+  const destId =
+    data.destId ||
+    data.destinationId ||
+    (destName ? destName.toLowerCase().replace(/[^a-z0-9]+/g, '-') : 'india');
+
+  // Normalize accommodation
+  let accommodation = data.accommodation;
+  if (accommodation) {
+    if (!accommodation.name || !Array.isArray(accommodation.amenities)) {
+      accommodation = {
+        name: accommodation.hotelName || accommodation.name || `${destName} Heritage Boutique Retreat`,
+        image: accommodation.image || primaryImage,
+        category: accommodation.tier || accommodation.category || '4★+ Handpicked Boutique / Heritage Stay',
+        amenities:
+          Array.isArray(accommodation.highlights) && accommodation.highlights.length > 0
+            ? accommodation.highlights
+            : Array.isArray(accommodation.amenities) && accommodation.amenities.length > 0
+              ? accommodation.amenities
+              : [
+                  'Daily Artisanal Breakfast',
+                  'Free High-Speed Wi-Fi',
+                  'Scenic Balcony & Garden View',
+                  '24×7 Concierge Desk',
+                  'Ayurvedic Wellness Spa',
+                  'Eco-Certified Sustainable Stay',
+                ],
+        shortDescription:
+          accommodation.shortDescription ||
+          `Handpicked boutique property tested by SukhYatri travel editors in ${destName}.`,
+      };
+    }
+  }
+
+  return {
+    ...data,
+    id: data.id || data._id || data.slug,
+    destination: destName,
+    destName,
+    destId,
+    image: primaryImage,
+    gallery,
+    price: typeof data.price === 'number' ? data.price : 24900,
+    mrp: data.mrp || data.originalPrice || Math.round((data.price || 24900) * 1.15),
+    originalPrice: data.originalPrice || data.mrp || Math.round((data.price || 24900) * 1.15),
+    rating: data.rating || 4.8,
+    reviewCount: data.reviewCount || data.reviewsCount || 48,
+    reviewsCount: data.reviewsCount || data.reviewCount || 48,
+    highlights: Array.isArray(data.highlights) ? data.highlights : [],
+    inclusions: Array.isArray(data.inclusions) ? data.inclusions : [],
+    exclusions: Array.isArray(data.exclusions) ? data.exclusions : [],
+    itinerary: Array.isArray(data.itinerary) ? data.itinerary : [],
+    reviews: Array.isArray(data.reviews) ? data.reviews : [],
+    accommodation,
+    travelStyle: data.travelStyle || 'Relaxation',
+    themes: Array.isArray(data.themes) ? data.themes : [],
+  };
+}
+
 export const apiService = {
   // Destinations
   async getDestinations(): Promise<Destination[]> {
@@ -69,7 +141,9 @@ export const apiService = {
       params.set('limit', '50');
 
       const data = await apiClient.get<TripPackage[]>(`/trips?${params.toString()}`);
-      if (Array.isArray(data) && data.length > 0) return data;
+      if (Array.isArray(data) && data.length > 0) {
+        return data.map(normalizeTripPackage);
+      }
     } catch (e) {
       console.warn('[apiService] Falling back to local packages data', e);
     }
@@ -91,19 +165,19 @@ export const apiService = {
     }
     if (filters.minPrice !== undefined) list = list.filter((p) => p.price >= filters.minPrice!);
     if (filters.maxPrice !== undefined) list = list.filter((p) => p.price <= filters.maxPrice!);
-    return list;
+    return list.map(normalizeTripPackage);
   },
 
   async getPackageBySlug(slug: string): Promise<TripPackage | null> {
     try {
-      const data = await apiClient.get<TripPackage>(`/trips/${slug.toLowerCase()}`);
-      if (data) return data;
+      const data = await apiClient.get<any>(`/trips/${slug.toLowerCase()}`);
+      if (data) return normalizeTripPackage(data);
     } catch {
       // Fallback
     }
     const clean = slug.toLowerCase();
     const pkg = PACKAGES.find((p) => p.slug.toLowerCase() === clean || p.id.toLowerCase() === clean);
-    return pkg || null;
+    return pkg ? normalizeTripPackage(pkg) : null;
   },
 
   async getPackageById(id: string): Promise<TripPackage | null> {

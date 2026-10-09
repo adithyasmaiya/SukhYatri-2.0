@@ -9,9 +9,10 @@ export interface ItineraryTimelineProps {
 }
 
 export const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
-  itinerary,
+  itinerary = [],
   durationDays,
 }) => {
+  const itineraryList = Array.isArray(itinerary) ? itinerary : [];
   const [expandedDays, setExpandedDays] = useState<number[]>([1]); // First day open by default
 
   const toggleDay = (dayNum: number) => {
@@ -21,14 +22,14 @@ export const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
   };
 
   const expandAll = () => {
-    setExpandedDays(itinerary.map((d) => d.day));
+    setExpandedDays(itineraryList.map((d) => d.day));
   };
 
   const collapseAll = () => {
     setExpandedDays([]);
   };
 
-  const isAllExpanded = expandedDays.length === itinerary.length;
+  const isAllExpanded = expandedDays.length === itineraryList.length && itineraryList.length > 0;
 
   return (
     <section className="space-y-6">
@@ -47,7 +48,7 @@ export const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
 
         <div className="flex items-center gap-2.5">
           <Badge variant="white">
-            {durationDays || itinerary.length} Days · Handcrafted Route
+            {durationDays || itineraryList.length} Days · Handcrafted Route
           </Badge>
           <button
             type="button"
@@ -60,7 +61,7 @@ export const ItineraryTimeline: React.FC<ItineraryTimelineProps> = ({
       </div>
 
       <div className="relative pl-3 sm:pl-6 space-y-4 before:absolute before:left-[19px] sm:before:left-[31px] before:top-6 before:bottom-6 before:w-[2px] before:bg-stonewarm">
-        {itinerary.map((day) => {
+        {itineraryList.map((day) => {
           const isOpen = expandedDays.includes(day.day);
 
           return (
