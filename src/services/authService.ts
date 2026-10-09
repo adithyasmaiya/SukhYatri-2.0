@@ -66,11 +66,6 @@ export const authService: IAuthService = {
       }
       return { success: false, error: 'Authentication failed' };
     } catch (err: any) {
-      // Offline fallback for demo test users if server is launching
-      if (email.toLowerCase() === 'ananya@example.com' && (password === 'Password123!' || password === 'sukhyatri123')) {
-        localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(DEFAULT_FALLBACK_USER));
-        return { success: true, user: DEFAULT_FALLBACK_USER };
-      }
       return {
         success: false,
         error: err.message || 'Invalid email or password. Please try again.',

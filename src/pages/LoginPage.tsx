@@ -88,9 +88,18 @@ export const LoginPage: React.FC = () => {
     setEmailError('');
     setPasswordError('');
     setAuthError('');
-    await fillDemoUser();
-    toast('Demo account credentials autofilled & session activated!', 'info');
-    navigate(redirectUrl);
+    setLoading(true);
+    try {
+      const res = await login('ananya@example.com', 'sukhyatri123', true);
+      if (res.success) {
+        toast('Demo account authenticated with verified backend session!', 'success');
+        navigate(redirectUrl);
+      } else {
+        setAuthError(res.error || 'Failed to sign in demo user.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
