@@ -132,7 +132,7 @@ export const paymentService = {
     // Format phone number to clean 10-digit if present
     const cleanPhone = customer.phone ? customer.phone.replace(/[^0-9]/g, '').slice(-10) : '';
 
-    const options = {
+    const options: any = {
       key: keyId,
       amount: order.amount, // in paise
       currency: order.currency || 'INR',
@@ -143,7 +143,7 @@ export const paymentService = {
       prefill: {
         name: customer.name || '',
         email: customer.email || '',
-        contact: cleanPhone ? `+91${cleanPhone}` : '',
+        contact: cleanPhone ? `+91${cleanPhone}` : '+919876543210',
       },
       notes: {
         bookingId: order.bookingId,
@@ -152,6 +152,45 @@ export const paymentService = {
       theme: {
         color: '#1E3D34', // SukhYatri deep pine green
         backdrop_color: 'rgba(15, 23, 42, 0.85)',
+      },
+      // Explicitly request and prioritize UPI payment flow in Checkout
+      method: {
+        upi: true,
+        card: true,
+        netbanking: true,
+        wallet: true,
+      },
+      config: {
+        display: {
+          blocks: {
+            upi: {
+              name: 'Pay using UPI / QR',
+              instruments: [
+                {
+                  method: 'upi',
+                },
+              ],
+            },
+            other: {
+              name: 'Cards & Other Methods',
+              instruments: [
+                {
+                  method: 'card',
+                },
+                {
+                  method: 'netbanking',
+                },
+                {
+                  method: 'wallet',
+                },
+              ],
+            },
+          },
+          sequence: ['block.upi', 'block.other'],
+          preferences: {
+            show_default_blocks: true,
+          },
+        },
       },
       modal: {
         ondismiss: () => {
